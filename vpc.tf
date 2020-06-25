@@ -30,9 +30,9 @@ resource "aws_internet_gateway" "foundry" {
 }
 
 resource "aws_route" "foundry_gateway" {
-  destination_cidr_block    = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.foundry.id
-  route_table_id            = aws_vpc.foundry.main_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.foundry.id
+  route_table_id         = aws_vpc.foundry.main_route_table_id
 }
 
 output internet_gateway_arn {

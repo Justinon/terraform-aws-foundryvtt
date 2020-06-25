@@ -62,7 +62,7 @@ start_server() {
     --env FOUNDRY_AWS_CONFIG=true \
     --publish 30000:30000/tcp \
     --volume /data:/data \
-    felddy/foundryvtt:latest
+    $${foundry_docker_image}
 }
 
 # Create foundry data backup cron

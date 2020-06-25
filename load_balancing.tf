@@ -55,9 +55,9 @@ resource "aws_lb_target_group" "lb_foundry_server_http" {
 
   health_check {
     healthy_threshold = 2
-    matcher = "200-299,302"
-    path = "/"
-    protocol = "HTTP"
+    matcher           = "200-299,302"
+    path              = "/"
+    protocol          = "HTTP"
   }
 }
 
@@ -69,9 +69,9 @@ resource "aws_lb_target_group" "lb_foundry_server_https" {
 
   health_check {
     healthy_threshold = 2
-    matcher = "200-299,302"
-    path = "/"
-    protocol = "HTTPS"
+    matcher           = "200-299,302"
+    path              = "/"
+    protocol          = "HTTPS"
   }
 }
 

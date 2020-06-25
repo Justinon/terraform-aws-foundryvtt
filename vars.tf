@@ -71,8 +71,8 @@ variable instance_type {
 }
 
 variable key_name {
+  default     = ""
   description = "The name of the key to use for SSH. Can and should easily be generated as a key-pair in the AWS console."
-  type        = string
 }
 
 variable region {

@@ -49,7 +49,7 @@ resource "aws_lb" "foundry_server" {
 
 resource "aws_lb_target_group" "lb_foundry_server_http" {
   name     = "${aws_lb.foundry_server.name}-http-tg"
-  port     = aws_security_group_rule.lb_allow_inbound_80.to_port
+  port     = local.foundry_port
   protocol = "HTTP"
   vpc_id   = aws_vpc.foundry.id
 
@@ -77,7 +77,7 @@ resource "aws_lb_target_group" "lb_foundry_server_https" {
 
 resource "aws_lb_listener" "foundry_server_http" {
   load_balancer_arn = aws_lb.foundry_server.arn
-  port              = local.foundry_port
+  port              = aws_security_group_rule.lb_allow_inbound_80.to_port
   protocol          = aws_lb_target_group.lb_foundry_server_http.protocol
 
   default_action {

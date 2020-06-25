@@ -27,6 +27,11 @@ variable aws_automation_role_arn {
   type        = string
 }
 
+variable domain_name {
+  default = ""
+  description = "(Optional) Domain used for the endpoint to the server."
+}
+
 variable ebs_block_devices {
   default     = []
   description = "Should you want to mount any ebs block devices, such as for data storage, do so here."

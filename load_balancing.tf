@@ -2,6 +2,19 @@ locals {
   foundry_port = 30000
 }
 
+resource "aws_acm_certificate" "lb_cert" {
+  domain_name       = var.domain_name
+  validation_method = "DNS"
+
+  tags = {
+    Environment = "test"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_security_group" "foundry_load_balancer" {
   name_prefix            = "foundry-lb-sg-${terraform.workspace}"
   revoke_rules_on_delete = true

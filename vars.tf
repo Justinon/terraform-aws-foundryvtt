@@ -14,7 +14,7 @@ locals {
 
 variable artifacts_data_expiration_days {
   default     = 30
-  description = "The amount of days after which non-current version of foundry data is expired."
+  description = "The amount of days after which non-current version of Foundry data is expired."
 }
 
 variable aws_account_id {
@@ -23,7 +23,7 @@ variable aws_account_id {
 }
 
 variable aws_automation_role_arn {
-  description = "The automation role used by Terraform to perform apply. Gets decrypt/encrypt access to KMS credentials key."
+  description = "The automation role used by Terraform. Gets decrypt/encrypt access to KMS credentials key."
   type        = string
 }
 
@@ -36,8 +36,8 @@ variable ebs_block_devices {
 }
 
 variable foundry_admin_key {
-  default     = "none"
-  description = "(Optional) Will be encrypted in AWS Parameter Store for exclusive use by the foundry server to configure the foundry tool."
+  default     = ""
+  description = "The Admin Access Key to set for password-protecting administration access to the Foundry tool. Will be encrypted in AWS Parameter Store for exclusive use by the server."
   type        = string
 }
 
@@ -47,36 +47,37 @@ variable foundry_artifacts_bucket_public {
 }
 
 variable foundry_password {
-  description = "Will be encrypted in AWS Parameter Store for exclusive use by the foundry server to configure the foundry tool."
+  description = "Will be encrypted in AWS Parameter Store for exclusive use by the Foundry server to configure the tool."
   type        = string
 }
 
 variable foundry_username {
-  description = "Will be encrypted in AWS Parameter Store for exclusive use by the foundry server to configure the foundry tool."
+  description = "Will be encrypted in AWS Parameter Store for exclusive use by the Foundry server to configure the tool."
   type        = string
 }
 
 variable foundryvtt_docker_image {
-  default = "felddy/foundryvtt:latest"
+  default     = "felddy/foundryvtt:latest"
+  description = "Probably won't work with other images yet but the option is there if you want to experiment"
 }
 
 variable home_ip_address {
-  description = "The IP address of your home network, which is the only IP allowed to SSH to the foundry server instance."
+  description = "The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance."
   type        = string
 }
 
 variable instance_type {
   default     = "t2.micro"
-  description = "Defaults to free tier eligible type."
+  description = "The instance type on which the Foundry server runs. Defaults to free tier eligible type."
 }
 
 variable key_name {
   default     = ""
-  description = "The name of the key to use for SSH. Can and should easily be generated as a key-pair in the AWS console."
+  description = "The name of the key to use for SSH. Can be easily be generated as a key-pair in the AWS console."
 }
 
 variable region {
-  description = "The closest region to you, as to minimize latency."
+  description = "The closest region to you and/or your party, to minimize latency."
   type        = string
 }
 

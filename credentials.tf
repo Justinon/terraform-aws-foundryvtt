@@ -68,7 +68,7 @@ resource "aws_ssm_parameter" "foundry_password" {
 }
 
 resource "aws_ssm_parameter" "foundry_admin_key" {
-  count       = var.foundry_admin_key == "none" ? 0 : 1
+  count       = var.foundry_admin_key == "" ? 0 : 1
   description = "Used exclusively by the foundry server to configure the foundry tool."
   key_id      = aws_kms_key.foundry_server_credentials.arn
   name        = "/foundryvtt-terraform/${terraform.workspace}/admin_key"

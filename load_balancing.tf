@@ -43,7 +43,7 @@ resource "aws_lb" "foundry_server" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.foundry_load_balancer.id]
-  subnets            = [aws_subnet.foundry_public_first.id, aws_subnet.foundry_public_second.id]
+  subnets            = local.subnet_public_ids
   tags               = local.tags_rendered
 }
 

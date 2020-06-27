@@ -36,37 +36,46 @@ resource "aws_route" "foundry_gateway" {
 }
 
 output internet_gateway_arn {
-  value = aws_internet_gateway.foundry.arn
+  description = "The ARN of the Internet Gateway allowing internet access to public subnets in the Foundry VPC."
+  value       = aws_internet_gateway.foundry.arn
 }
 
 output internet_gateway_id {
-  value = aws_internet_gateway.foundry.id
+  description = "The ID of the Internet Gateway allowing internet access to public subnets in the Foundry VPC."
+  value       = aws_internet_gateway.foundry.id
 }
 
 output subnet_public_arns {
-  value = local.subnet_public_arns
+  description = "The ARN of the public subnets housing the server autoscaling group and load balancer."
+  value       = local.subnet_public_arns
 }
 
 output subnet_public_azs {
-  value = local.subnet_public_azs
+  description = "The availability zones of the public subnets housing the server autoscaling group and load balancer."
+  value       = local.subnet_public_azs
 }
 
 output subnet_public_ids {
-  value = local.subnet_public_ids
+  description = "The IDs of the public subnets housing the server autoscaling group and load balancer."
+  value       = local.subnet_public_ids
 }
 
 output vpc_arn {
-  value = aws_vpc.foundry.arn
+  description = "The ARN of the Foundry VPC housing all created and eligible resources."
+  value       = aws_vpc.foundry.arn
 }
 
 output vpc_cidr_block {
-  value = aws_vpc.foundry.cidr_block
+  description = "The CIDR block of the Foundry VPC housing all created and eligible resources."
+  value       = aws_vpc.foundry.cidr_block
 }
 
 output vpc_main_route_table_id {
-  value = aws_vpc.foundry.main_route_table_id
+  description = "The main and single route table for the Foundry VPC."
+  value       = aws_vpc.foundry.main_route_table_id
 }
 
 output vpc_id {
-  value = aws_vpc.foundry.id
+  description = "The ID of the Foundry VPC housing all created and eligible resources."
+  value       = aws_vpc.foundry.id
 }

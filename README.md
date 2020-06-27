@@ -85,8 +85,8 @@ module "foundryvtt_example" {
 | instance\_profile\_arn | The ARN of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
 | instance\_profile\_id | The ID of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
 | instance\_profile\_name | The name of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
-| internet\_gateway\_arn | n/a |
-| internet\_gateway\_id | n/a |
+| internet\_gateway\_arn | The ARN of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
+| internet\_gateway\_id | The ID of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
 | launch\_configuration\_arn | The ARN of the Foundry instance's launch configuration. |
 | launch\_configuration\_id | The ID of the Foundry instance's launch configuration. |
 | launch\_configuration\_name | The name of the Foundry instance's launch configuration. |
@@ -98,15 +98,15 @@ module "foundryvtt_example" {
 | policy\_name | The name of the policy attached to the Foundry server role. |
 | role\_arn | The ARN of the role the Foundry server uses to access credentials and the artifacts bucket. |
 | role\_name | The name of the role the Foundry server uses to access credentials and the artifacts bucket. |
-| subnet\_public\_arns | n/a |
-| subnet\_public\_azs | n/a |
-| subnet\_public\_ids | n/a |
+| subnet\_public\_arns | The ARN of the public subnets housing the server autoscaling group and load balancer. |
+| subnet\_public\_azs | The availability zones of the public subnets housing the server autoscaling group and load balancer. |
+| subnet\_public\_ids | The IDs of the public subnets housing the server autoscaling group and load balancer. |
 | target\_group\_http\_arn | The ARN of the HTTP target group receiving traffic from the HTTP ALB listener. |
 | target\_group\_http\_name | The name of the HTTP target group receiving traffic from the HTTP ALB listener. |
 | target\_group\_https\_arn | The ARN of the HTTPS target group receiving traffic from the HTTPS ALB listener. |
 | target\_group\_https\_name | The name of the HTTPS target group receiving traffic from the HTTPS ALB listener. |
-| vpc\_arn | n/a |
-| vpc\_cidr\_block | n/a |
-| vpc\_id | n/a |
-| vpc\_main\_route\_table\_id | n/a |
+| vpc\_arn | The ARN of the Foundry VPC housing all created and eligible resources. |
+| vpc\_cidr\_block | The CIDR block of the Foundry VPC housing all created and eligible resources. |
+| vpc\_id | The ID of the Foundry VPC housing all created and eligible resources. |
+| vpc\_main\_route\_table\_id | The main and single route table for the Foundry VPC. |
 

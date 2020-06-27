@@ -3,12 +3,14 @@
 Stand up a completely turn-key, secure Foundry Virtual Tabletop server using Terraform.
 
 - [terraform-aws-foundryvtt](#terraform-aws-foundryvtt)
-- [Description](#description)
-- [Prerequisites](#prerequisites)
-- [Usage](#usage)
-  - [Source](#source)
-  - [Variables](#variables)
-- [Services and Resources Used](#services-and-resources-used)
+ - [Description](#description)
+ - [Prerequisites](#prerequisites)
+ - [Usage](#usage)
+   - [Source](#source)
+   - [Variables](#variables)
+ - [Requirements](#requirements)
+ - [Inputs](#inputs)
+ - [Outputs](#outputs)
 
 ## Description  
 Creates a fully managed VPC housing your server behind an autoscaling group and load balancer. AWS will safely manage your secrets and Foundry data in conjunction with the server to maintain availability and consistency...while still leaving you in control.

@@ -1,6 +1,7 @@
 locals {
   foundry_port              = 30000
-  server_availability_zones = formatlist("${var.region}%s", ["a", "b"])
+  region                    = data.aws_region.current.name
+  server_availability_zones = formatlist("${local.region}%s", ["a", "b"])
 
   tag_foundry = {
     key   = "purpose"
@@ -11,6 +12,13 @@ locals {
     for tag in local.tags :
     tag.key => tag.value
   }
+}
+
+data "aws_region" "current" {}
+
+variable artifacts_bucket_public {
+  default     = false
+  description = "Whether or not the artifacts bucket should be public. To reuse this bucket for direct Amazon S3 asset storage in browser, set to true."
 }
 
 variable artifacts_data_expiration_days {
@@ -42,11 +50,6 @@ variable foundry_admin_key {
   type        = string
 }
 
-variable artifacts_bucket_public {
-  default     = false
-  description = "Whether or not the artifacts bucket should be public. To reuse this bucket for direct Amazon S3 asset storage in browser, set to true."
-}
-
 variable foundry_password {
   description = "Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license."
   type        = string
@@ -70,11 +73,6 @@ variable home_ip_address {
 variable instance_type {
   default     = "t2.micro"
   description = "The instance type on which the Foundry server runs. Defaults to free tier eligible type."
-}
-
-variable region {
-  description = "The closest region to you and/or your party, to minimize latency."
-  type        = string
 }
 
 variable security_groups {

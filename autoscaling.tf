@@ -27,7 +27,7 @@ data "template_file" "foundry_server_user_data" {
     foundry_docker_image     = var.foundryvtt_docker_image
     foundry_port             = local.foundry_port
     operating_system         = "Linux"
-    region                   = var.region
+    region                   = local.region
     terraform_workspace      = terraform.workspace
   }
 }

@@ -59,7 +59,6 @@ module "foundryvtt_example" {
 | foundry\_password | Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license. | `string` | n/a | yes |
 | foundry\_username | Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license. | `string` | n/a | yes |
 | home\_ip\_address | The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance. | `string` | n/a | yes |
-| region | The closest region to you and/or your party, to minimize latency. | `string` | n/a | yes |
 | artifacts\_bucket\_public | Whether or not the artifacts bucket should be public. To reuse this bucket for direct Amazon S3 asset storage in browser, set to true. | `bool` | `false` | no |
 | artifacts\_data\_expiration\_days | The amount of days after which non-current version of the artifacts bucket Foundry data is expired. | `number` | `30` | no |
 | ebs\_block\_devices | Should you want to mount any ebs block devices, such as for data storage, do so here. | <pre>list(object({<br>    device_name = string<br>  }))</pre> | `[]` | no |

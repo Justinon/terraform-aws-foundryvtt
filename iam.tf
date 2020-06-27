@@ -72,6 +72,17 @@ data "aws_iam_policy_document" "foundry_server" {
       "${aws_s3_bucket.foundry_artifacts.arn}/data/${terraform.workspace}/*"
     ]
   }
+
+  statement {
+    sid = "S3BucketObjectPutAccess"
+    actions = [
+      "elasticfilesystem:ClientMount",
+      "elasticfilesystem:ClientWrite"
+    ]
+    resources = [
+      "${aws_s3_bucket.foundry_artifacts.arn}/data/${terraform.workspace}/*"
+    ]
+  }
 }
 
 resource "aws_iam_policy" "foundry_server" {

@@ -20,7 +20,7 @@ data "aws_ami" "amzn_linux" {
 }
 
 data "template_file" "foundry_server_user_data" {
-  template = "${file("${path.module}/user_data.sh")}"
+  template = "${file("${path.module}/user_data.template.sh")}"
   vars = {
     architecture             = local.architecture
     foundry_artifacts_bucket = aws_s3_bucket.foundry_artifacts.id

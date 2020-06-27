@@ -71,7 +71,7 @@ variable instance_type {
   description = "The instance type on which the Foundry server runs. Defaults to free tier eligible type."
 }
 
-variable key_name {
+variable ssh_key_name {
   default     = ""
   description = "The name of the key to use for SSH. Can be easily be generated as a key-pair in the AWS console."
 }

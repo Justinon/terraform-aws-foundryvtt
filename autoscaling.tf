@@ -39,7 +39,7 @@ resource "aws_security_group" "foundry_server" {
 }
 
 resource "aws_security_group_rule" "allow_ssh" {
-  count = var.key_name == "" ? 0 : 1
+  count = var.ssh_key_name == "" ? 0 : 1
 
   cidr_blocks       = ["${var.home_ip_address}/32"]
   from_port         = 22
@@ -73,7 +73,7 @@ resource "aws_launch_configuration" "foundry_server_config" {
   iam_instance_profile        = aws_iam_instance_profile.foundry_server.name
   image_id                    = data.aws_ami.amzn_linux.id
   instance_type               = var.instance_type
-  key_name                    = var.key_name
+  ssh_key_name                = var.ssh_key_name
   name_prefix                 = "foundry-server-config-${terraform.workspace}"
   user_data_base64            = base64encode(data.template_file.foundry_server_user_data.rendered)
   security_groups             = concat(list(aws_security_group.foundry_server.id), var.security_groups)

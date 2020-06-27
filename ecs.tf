@@ -15,10 +15,10 @@ locals {
 
 resource "aws_ecs_cluster" "foundry_server" {
   name               = "foundry-server-${terraform.workspace}"
-  capacity_providers = "FARGATE"
+  capacity_providers = ["FARGATE"]
   tags               = local.tags_rendered
 
-  settings {
+  setting {
     name  = "containerInsights"
     value = "enabled"
   }

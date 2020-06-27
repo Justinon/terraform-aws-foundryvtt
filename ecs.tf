@@ -10,7 +10,7 @@ locals {
   }
 
   ecs_container_availability_zones_stringified = format("[%s]", join(", ", local.server_availability_zones))
-  ecs_container_foundry_user_and_group_id      = "foundry"
+  ecs_container_foundry_user_and_group_id      = 421
 }
 
 resource "aws_ecs_cluster" "foundry_server" {

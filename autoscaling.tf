@@ -25,9 +25,7 @@ data "template_file" "foundry_server_user_data" {
     architecture             = local.architecture
     foundry_artifacts_bucket = aws_s3_bucket.foundry_artifacts.id
     foundry_docker_image     = var.foundryvtt_docker_image
-    foundry_gid              = local.ecs_container_foundry_user_and_group_id
     foundry_port             = local.foundry_port
-    foundry_uid              = local.ecs_container_foundry_user_and_group_id
     operating_system         = "Linux"
     region                   = local.region
     terraform_workspace      = terraform.workspace

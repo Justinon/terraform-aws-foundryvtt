@@ -1,7 +1,7 @@
 locals {
-  subnet_public_arns = [aws_subnet.foundry_public_first.arn, aws_subnet.foundry_public_first.arn]
-  subnet_public_azs  = [aws_subnet.foundry_public_first.availability_zone, aws_subnet.foundry_public_first.availability_zone]
-  subnet_public_ids  = [aws_subnet.foundry_public_first.id, aws_subnet.foundry_public_first.id]
+  subnet_public_arns = [aws_subnet.foundry_public_first.arn, aws_subnet.foundry_public_second.arn]
+  subnet_public_azs  = [aws_subnet.foundry_public_first.availability_zone, aws_subnet.foundry_public_second.availability_zone]
+  subnet_public_ids  = [aws_subnet.foundry_public_first.id, aws_subnet.foundry_public_second.id]
 }
 
 resource "aws_vpc" "foundry" {

@@ -77,9 +77,9 @@ module "foundryvtt_example" {
 |------|-------------|
 | artifacts\_bucket\_arn | n/a |
 | artifacts\_bucket\_name | n/a |
-| asg\_arn | n/a |
-| asg\_azs | n/a |
-| asg\_id | n/a |
+| asg\_arn | The ARN of the autoscaling group serving the Foundry instance. |
+| asg\_azs | The availability zones in which the autoscaling group serves the Foundry instance. |
+| asg\_id | The ID of the autoscaling group serving the Foundry instance. |
 | credentials\_kms\_key\_arn | n/a |
 | credentials\_kms\_key\_id | n/a |
 | instance\_profile\_arn | The ARN of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
@@ -87,9 +87,9 @@ module "foundryvtt_example" {
 | instance\_profile\_name | The name of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
 | internet\_gateway\_arn | n/a |
 | internet\_gateway\_id | n/a |
-| launch\_configuration\_arn | n/a |
-| launch\_configuration\_id | n/a |
-| launch\_configuration\_name | n/a |
+| launch\_configuration\_arn | The ARN of the Foundry instance's launch configuration. |
+| launch\_configuration\_id | The ID of the Foundry instance's launch configuration. |
+| launch\_configuration\_name | The name of the Foundry instance's launch configuration. |
 | lb\_arn | n/a |
 | lb\_dns\_name | n/a |
 | lb\_zone\_id | n/a |

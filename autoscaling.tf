@@ -73,7 +73,7 @@ resource "aws_launch_configuration" "foundry_server_config" {
   iam_instance_profile        = aws_iam_instance_profile.foundry_server.name
   image_id                    = data.aws_ami.amzn_linux.id
   instance_type               = var.instance_type
-  key_name                = var.ssh_key_name
+  key_name                    = var.ssh_key_name
   name_prefix                 = "foundry-server-config-${terraform.workspace}"
   user_data_base64            = base64encode(data.template_file.foundry_server_user_data.rendered)
   security_groups             = concat(list(aws_security_group.foundry_server.id), var.security_groups)
@@ -135,25 +135,31 @@ resource "aws_autoscaling_group" "foundry_server" {
 }
 
 output asg_arn {
-  value = aws_autoscaling_group.foundry_server.arn
+  description = "The ARN of the autoscaling group serving the Foundry instance."
+  value       = aws_autoscaling_group.foundry_server.arn
 }
 
 output asg_azs {
-  value = aws_autoscaling_group.foundry_server.availability_zones
+  description = "The availability zones in which the autoscaling group serves the Foundry instance."
+  value       = aws_autoscaling_group.foundry_server.availability_zones
 }
 
 output asg_id {
-  value = aws_autoscaling_group.foundry_server.id
+  description = "The ID of the autoscaling group serving the Foundry instance."
+  value       = aws_autoscaling_group.foundry_server.id
 }
 
 output launch_configuration_arn {
-  value = aws_launch_configuration.foundry_server_config.arn
+  description = "The ARN of the Foundry instance's launch configuration."
+  value       = aws_launch_configuration.foundry_server_config.arn
 }
 
 output launch_configuration_id {
-  value = aws_launch_configuration.foundry_server_config.id
+  description = "The ID of the Foundry instance's launch configuration."
+  value       = aws_launch_configuration.foundry_server_config.id
 }
 
 output launch_configuration_name {
-  value = aws_launch_configuration.foundry_server_config.name
+  description = "The name of the Foundry instance's launch configuration."
+  value       = aws_launch_configuration.foundry_server_config.name
 }

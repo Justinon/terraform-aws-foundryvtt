@@ -47,9 +47,11 @@ resource "aws_s3_bucket_public_access_block" "foundry_artifacts_private" {
 }
 
 output artifacts_bucket_name {
-  value = aws_s3_bucket.foundry_artifacts.id
+  description = "The name of the S3 bucket holding versioned Foundry data."
+  value       = aws_s3_bucket.foundry_artifacts.id
 }
 
 output artifacts_bucket_arn {
-  value = aws_s3_bucket.foundry_artifacts.arn
+  description = "The ARN of the S3 bucket holding versioned Foundry data."
+  value       = aws_s3_bucket.foundry_artifacts.arn
 }

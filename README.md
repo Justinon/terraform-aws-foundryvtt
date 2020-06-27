@@ -75,8 +75,8 @@ module "foundryvtt_example" {
 
 | Name | Description |
 |------|-------------|
-| artifacts\_bucket\_arn | n/a |
-| artifacts\_bucket\_name | n/a |
+| artifacts\_bucket\_arn | The ARN of the S3 bucket holding versioned Foundry data. |
+| artifacts\_bucket\_name | The name of the S3 bucket holding versioned Foundry data. |
 | asg\_arn | The ARN of the autoscaling group serving the Foundry instance. |
 | asg\_azs | The availability zones in which the autoscaling group serves the Foundry instance. |
 | asg\_id | The ID of the autoscaling group serving the Foundry instance. |

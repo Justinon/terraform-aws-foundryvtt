@@ -71,11 +71,6 @@ variable instance_type {
   description = "The instance type on which the Foundry server runs. Defaults to free tier eligible type."
 }
 
-variable ssh_key_name {
-  default     = ""
-  description = "The name of the key to use for SSH. Can be easily be generated as a key-pair in the AWS console."
-}
-
 variable region {
   description = "The closest region to you and/or your party, to minimize latency."
   type        = string
@@ -84,6 +79,11 @@ variable region {
 variable security_groups {
   default     = []
   description = "Any extra security groups to associate with the Foundry server."
+}
+
+variable ssh_key_name {
+  default     = ""
+  description = "The name of the key to use for SSH. Can be easily be generated as a key-pair in the AWS console."
 }
 
 variable tags {

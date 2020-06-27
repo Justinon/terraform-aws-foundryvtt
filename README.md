@@ -1,8 +1,8 @@
-# foundryvtt-terraform
+# terraform-aws-foundryvtt
 
 Stand up a completely turn-key, secure Foundry Virtual Tabletop server using Terraform.
 
-- [foundryvtt-terraform](#foundryvtt-terraform)
+- [terraform-aws-foundryvtt](#terraform-aws-foundryvtt)
 - [Description](#description)
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
@@ -26,7 +26,7 @@ This is the module for you if:
 
 ## Usage
 
-First you'll need to decide which version to use. I recommend using the [latest release tag](https://github.com/Justinon/foundryvtt-terraform/releases) if you can. Otherwise, search for the one that suits you.
+First you'll need to decide which version to use. I recommend using the [latest release tag](https://github.com/Justinon/terraform-aws-foundryvtt/releases) if you can. Otherwise, search for the one that suits you.
 
 ### Source  
 You can create the module with the source and version of choice using either SSH or HTTPS:
@@ -34,20 +34,20 @@ You can create the module with the source and version of choice using either SSH
 SSH:
 ```HCL
 module "foundryvtt_example" {
-  source = "git@github.com:Justinon/foundryvtt-terraform.git?ref=<VERSION>"
+  source = "git@github.com:Justinon/terraform-aws-foundryvtt.git?ref=<VERSION>"
   ...
 }
 ```  
 HTTPS:
 ```HCL
 module "foundryvtt_example" {
-  source = "github.com/Justinon/foundryvtt-terraform?ref=<VERSION>"
+  source = "github.com/Justinon/terraform-aws-foundryvtt?ref=<VERSION>"
   ...
 }
 ```
 
 ### Variables  
-At minimum, *foundryvtt-terraform* requires the following variables:  
+At minimum, *terraform-aws-foundryvtt* requires the following variables:  
 1. `aws_account_id`: The AWS account ID to which Terraform will deploy resources  
 2. `aws_automation_role_arn`: The ARN of the role used by Terraform to act on your behalf  
 3. `foundry_password`: The Foundry password used by the server to obtain your license  

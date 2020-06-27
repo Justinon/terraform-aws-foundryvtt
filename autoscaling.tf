@@ -73,7 +73,7 @@ resource "aws_launch_configuration" "foundry_server_config" {
   iam_instance_profile        = aws_iam_instance_profile.foundry_server.name
   image_id                    = data.aws_ami.amzn_linux.id
   instance_type               = var.instance_type
-  ssh_key_name                = var.ssh_key_name
+  key_name                = var.ssh_key_name
   name_prefix                 = "foundry-server-config-${terraform.workspace}"
   user_data_base64            = base64encode(data.template_file.foundry_server_user_data.rendered)
   security_groups             = concat(list(aws_security_group.foundry_server.id), var.security_groups)

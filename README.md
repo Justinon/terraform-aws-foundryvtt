@@ -47,8 +47,8 @@ module "foundryvtt_example" {
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.68.0 |
-| template | >= 2.1 |
+| aws | -> 2.68.0 |
+| template | -> 2.1 |
 
 ## Inputs
 

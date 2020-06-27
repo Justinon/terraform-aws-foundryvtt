@@ -25,6 +25,7 @@ data "template_file" "foundry_server_user_data" {
     architecture             = local.architecture
     foundry_artifacts_bucket = aws_s3_bucket.foundry_artifacts.id
     foundry_docker_image     = var.foundryvtt_docker_image
+    foundry_port             = local.foundry_port
     operating_system         = "Linux"
     region                   = var.region
     terraform_workspace      = terraform.workspace
@@ -50,11 +51,11 @@ resource "aws_security_group_rule" "allow_ssh" {
 }
 
 resource "aws_security_group_rule" "allow_foundry_port_ingress" {
-  from_port                = 30000
+  from_port                = local.foundry_port
   protocol                 = "tcp"
   security_group_id        = aws_security_group.foundry_server.id
   source_security_group_id = aws_security_group.foundry_load_balancer.id
-  to_port                  = 30000
+  to_port                  = local.foundry_port
   type                     = "ingress"
 }
 

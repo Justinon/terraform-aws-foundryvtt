@@ -1,7 +1,3 @@
-locals {
-  foundry_port = 30000
-}
-
 resource "aws_security_group" "foundry_load_balancer" {
   name_prefix            = "foundry-lb-sg-${terraform.workspace}"
   revoke_rules_on_delete = true

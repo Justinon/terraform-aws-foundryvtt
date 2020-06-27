@@ -1,15 +1,16 @@
 locals {
-  foundry_tag = {
+  foundry_port              = 30000
+  server_availability_zones = formatlist("${var.region}%s", ["a", "b"])
+
+  tag_foundry = {
     key   = "purpose"
     value = "foundry-server"
   }
-  tags = length(var.tags) == 0 ? list(local.foundry_tag) : list(local.foundry_tag, var.tags...)
+  tags = length(var.tags) == 0 ? list(local.tag_foundry) : list(local.tag_foundry, var.tags...)
   tags_rendered = {
     for tag in local.tags :
     tag.key => tag.value
   }
-
-  server_availability_zones = formatlist("${var.region}%s", ["a", "b"])
 }
 
 variable artifacts_data_expiration_days {

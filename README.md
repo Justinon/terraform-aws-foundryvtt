@@ -80,8 +80,8 @@ module "foundryvtt_example" {
 | asg\_arn | The ARN of the autoscaling group serving the Foundry instance. |
 | asg\_azs | The availability zones in which the autoscaling group serves the Foundry instance. |
 | asg\_id | The ID of the autoscaling group serving the Foundry instance. |
-| credentials\_kms\_key\_arn | n/a |
-| credentials\_kms\_key\_id | n/a |
+| credentials\_kms\_key\_arn | The ARN of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively. |
+| credentials\_kms\_key\_id | The ID of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively. |
 | instance\_profile\_arn | The ARN of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
 | instance\_profile\_id | The ID of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
 | instance\_profile\_name | The name of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |

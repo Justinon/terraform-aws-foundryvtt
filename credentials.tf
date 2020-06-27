@@ -78,9 +78,11 @@ resource "aws_ssm_parameter" "foundry_admin_key" {
 }
 
 output credentials_kms_key_arn {
+  description = "The ARN of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively."
   value = aws_kms_key.foundry_server_credentials.arn
 }
 
 output credentials_kms_key_id {
+  description = "The ID of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively."
   value = aws_kms_key.foundry_server_credentials.key_id
 }

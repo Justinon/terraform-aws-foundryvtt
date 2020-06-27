@@ -15,7 +15,7 @@ locals {
 
 variable artifacts_data_expiration_days {
   default     = 30
-  description = "The amount of days after which non-current version of Foundry data is expired."
+  description = "The amount of days after which non-current version of the artifacts bucket Foundry data is expired."
 }
 
 variable aws_account_id {

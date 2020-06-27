@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "foundry_server" {
   }
 
   statement {
-    sid = "S3BucketObjectPutAccess"
+    sid = "EFSFoundryDataMountWriteAccess"
     actions = [
       "elasticfilesystem:ClientMount",
       "elasticfilesystem:ClientWrite"

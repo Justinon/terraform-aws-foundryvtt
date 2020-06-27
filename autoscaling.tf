@@ -42,7 +42,7 @@ resource "aws_security_group" "foundry_server" {
 resource "aws_security_group_rule" "allow_ssh" {
   count = var.ssh_key_name == "" ? 0 : 1
 
-  cidr_blocks       = ["${var.home_ip_address}/32"]
+  cidr_blocks       = ["${var.ssh_ip_address}/32"]
   from_port         = 22
   protocol          = "tcp"
   security_group_id = aws_security_group.foundry_server.id

@@ -63,10 +63,10 @@ module "foundryvtt_example" {
 | ebs\_block\_devices | Should you want to mount any ebs block devices, such as for data storage, do so here. | <pre>list(object({<br>    device_name = string<br>  }))</pre> | `[]` | no |
 | foundry\_admin\_key | The Admin Access Key to set for password-protecting administration access to the Foundry tool. Will be encrypted in AWS Parameter Store for exclusive use by the server. | `string` | `""` | no |
 | foundryvtt\_docker\_image | Probably won't work with other images yet but the option is there if you want to experiment | `string` | `"felddy/foundryvtt:latest"` | no |
-| home\_ip\_address | Only required if using populating ssh\_key\_name variable: The public IP address of your home network, the only IP allowed to SSH to the Foundry server instance. | `string` | `""` | no |
 | instance\_type | The instance type on which the Foundry server runs. Defaults to free tier eligible type. | `string` | `"t2.micro"` | no |
 | security\_groups | Any extra security groups to associate with the Foundry server. | `list` | `[]` | no |
-| ssh\_key\_name | The name of the SSH key to use for Foundry server access, which only your home\_ip\_address will have. Can be easily be generated as a key-pair in the AWS console. | `string` | `""` | no |
+| ssh\_ip\_address | The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance. Only required if populating ssh\_key\_name variable. | `string` | `""` | no |
+| ssh\_key\_name | The name of the SSH key to use for Foundry server access. Must populate ssh\_ip\_address variable. | `string` | `""` | no |
 | tags | Any additional AWS tags you want associated with all created and eligible resources. | <pre>list(object({<br>    key   = string,<br>    value = string<br>  }))</pre> | `[]` | no |
 | vpc\_cidr\_block | The CIDR block of the Foundry VPC housing all created and eligible resources. | `string` | `"20.0.0.0/16"` | no |
 

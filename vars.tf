@@ -65,12 +65,6 @@ variable foundryvtt_docker_image {
   description = "Probably won't work with other images yet but the option is there if you want to experiment"
 }
 
-variable home_ip_address {
-  default     = ""
-  description = "Only required if using populating ssh_key_name variable: The public IP address of your home network, the only IP allowed to SSH to the Foundry server instance."
-  type        = string
-}
-
 variable instance_type {
   default     = "t2.micro"
   description = "The instance type on which the Foundry server runs. Defaults to free tier eligible type."
@@ -81,9 +75,15 @@ variable security_groups {
   description = "Any extra security groups to associate with the Foundry server."
 }
 
+variable ssh_ip_address {
+  default     = ""
+  description = "The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance. Only required if populating ssh_key_name variable."
+  type        = string
+}
+
 variable ssh_key_name {
   default     = ""
-  description = "The name of the SSH key to use for Foundry server access, which only your home_ip_address will have. Can be easily be generated as a key-pair in the AWS console."
+  description = "The name of the SSH key to use for Foundry server access. Must populate ssh_ip_address variable."
 }
 
 variable tags {

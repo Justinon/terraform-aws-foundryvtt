@@ -1,0 +1,1 @@
+Demonstrating the simplest usage of the module in a Terraform configuration.

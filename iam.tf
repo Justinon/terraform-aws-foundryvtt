@@ -74,14 +74,33 @@ data "aws_iam_policy_document" "foundry_server" {
   }
 
   statement {
-    sid = "EFSFoundryDataMountWriteAccess"
+    sid = "EFSFoundryDataMountAccess"
     actions = [
       "elasticfilesystem:ClientMount",
+    ]
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["true"]
+    }
+  }
+
+  statement {
+    sid = "EFSFoundryDataWriteAccess"
+    actions = [
       "elasticfilesystem:ClientWrite"
     ]
-    resources = [
-      "${aws_s3_bucket.foundry_artifacts.arn}/data/${terraform.workspace}/*"
-    ]
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["true"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "elasticfilesystem:AccessPointArn"
+      values   = [aws_efs_access_point.foundry_server_data.arn]
+    }
+    resources = [aws_efs_file_system.foundry_server_data.arn]
   }
 }
 

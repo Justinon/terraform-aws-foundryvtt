@@ -90,9 +90,9 @@ module "foundryvtt_example" {
 | launch\_configuration\_arn | The ARN of the Foundry instance's launch configuration. |
 | launch\_configuration\_id | The ID of the Foundry instance's launch configuration. |
 | launch\_configuration\_name | The name of the Foundry instance's launch configuration. |
-| lb\_arn | n/a |
-| lb\_dns\_name | n/a |
-| lb\_zone\_id | n/a |
+| lb\_arn | The ARN of the application load balancer in front of the ASG serving the Foundry instance. |
+| lb\_dns\_name | The main entrypoint to the Foundry tool for users and GMs. Is the DNS name of the application load balancer in front of the ASG serving the Foundry instance. Can be used with Route53. |
+| lb\_zone\_id | The Route53 zone ID of the application load balancer in front of the ASG serving the Foundry instance. |
 | policy\_arn | The ARN of the policy attached to the Foundry server role. |
 | policy\_id | The ID of the policy attached to the Foundry server role. |
 | policy\_name | The name of the policy attached to the Foundry server role. |
@@ -101,10 +101,10 @@ module "foundryvtt_example" {
 | subnet\_public\_arns | n/a |
 | subnet\_public\_azs | n/a |
 | subnet\_public\_ids | n/a |
-| target\_group\_http\_arn | n/a |
-| target\_group\_http\_name | n/a |
-| target\_group\_https\_arn | n/a |
-| target\_group\_https\_name | n/a |
+| target\_group\_http\_arn | The ARN of the HTTP target group receiving traffic from the HTTP ALB listener. |
+| target\_group\_http\_name | The name of the HTTP target group receiving traffic from the HTTP ALB listener. |
+| target\_group\_https\_arn | The ARN of the HTTPS target group receiving traffic from the HTTPS ALB listener. |
+| target\_group\_https\_name | The name of the HTTPS target group receiving traffic from the HTTPS ALB listener. |
 | vpc\_arn | n/a |
 | vpc\_cidr\_block | n/a |
 | vpc\_id | n/a |

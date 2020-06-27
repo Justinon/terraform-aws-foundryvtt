@@ -56,8 +56,8 @@ module "foundryvtt_example" {
 |------|-------------|------|---------|:--------:|
 | aws\_account\_id | The root user of the AWS account provided will be the sole credentials KMS key administrator. | `string` | n/a | yes |
 | aws\_automation\_role\_arn | The automation role used by Terraform. Gets decrypt/encrypt access to KMS credentials key. | `string` | n/a | yes |
-| foundry\_password | Will be encrypted in AWS Parameter Store for exclusive use by the Foundry server to configure the tool. | `string` | n/a | yes |
-| foundry\_username | Will be encrypted in AWS Parameter Store for exclusive use by the Foundry server to configure the tool. | `string` | n/a | yes |
+| foundry\_password | Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license. | `string` | n/a | yes |
+| foundry\_username | Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license. | `string` | n/a | yes |
 | home\_ip\_address | The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance. | `string` | n/a | yes |
 | region | The closest region to you and/or your party, to minimize latency. | `string` | n/a | yes |
 | artifacts\_data\_expiration\_days | The amount of days after which non-current version of Foundry data is expired. | `number` | `30` | no |
@@ -67,9 +67,9 @@ module "foundryvtt_example" {
 | foundryvtt\_docker\_image | Probably won't work with other images yet but the option is there if you want to experiment | `string` | `"felddy/foundryvtt:latest"` | no |
 | instance\_type | The instance type on which the Foundry server runs. Defaults to free tier eligible type. | `string` | `"t2.micro"` | no |
 | security\_groups | Any extra security groups to associate with the Foundry server. | `list` | `[]` | no |
-| ssh\_key\_name | The name of the key to use for SSH. Can be easily be generated as a key-pair in the AWS console. | `string` | `""` | no |
-| tags | n/a | <pre>list(object({<br>    key   = string,<br>    value = string<br>  }))</pre> | `[]` | no |
-| vpc\_cidr\_block | The CIDR block for the VPC. | `string` | `"20.0.0.0/16"` | no |
+| ssh\_key\_name | The name of the SSH key to use for Foundry server access, which only your home\_ip\_address will have. Can be easily be generated as a key-pair in the AWS console. | `string` | `""` | no |
+| tags | Any additional AWS tags you want associated with all created and eligible resources. | <pre>list(object({<br>    key   = string,<br>    value = string<br>  }))</pre> | `[]` | no |
+| vpc\_cidr\_block | The CIDR block of the Foundry VPC housing all created and eligible resources. | `string` | `"20.0.0.0/16"` | no |
 
 ## Outputs
 

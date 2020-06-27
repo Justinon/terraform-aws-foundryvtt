@@ -47,12 +47,12 @@ variable foundry_artifacts_bucket_public {
 }
 
 variable foundry_password {
-  description = "Will be encrypted in AWS Parameter Store for exclusive use by the Foundry server to configure the tool."
+  description = "Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license."
   type        = string
 }
 
 variable foundry_username {
-  description = "Will be encrypted in AWS Parameter Store for exclusive use by the Foundry server to configure the tool."
+  description = "Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license."
   type        = string
 }
 
@@ -83,7 +83,7 @@ variable security_groups {
 
 variable ssh_key_name {
   default     = ""
-  description = "The name of the key to use for SSH. Can be easily be generated as a key-pair in the AWS console."
+  description = "The name of the SSH key to use for Foundry server access, which only your home_ip_address will have. Can be easily be generated as a key-pair in the AWS console."
 }
 
 variable tags {
@@ -91,11 +91,12 @@ variable tags {
     key   = string,
     value = string
   }))
-  default = []
+  default     = []
+  description = "Any additional AWS tags you want associated with all created and eligible resources."
 }
 
 variable vpc_cidr_block {
-  description = "The CIDR block for the VPC."
+  description = "The CIDR block of the Foundry VPC housing all created and eligible resources."
   default     = "20.0.0.0/16"
   type        = string
 }

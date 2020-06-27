@@ -5,9 +5,7 @@ Stand up a completely turn-key, secure Foundry Virtual Tabletop server using Ter
 - [terraform-aws-foundryvtt](#terraform-aws-foundryvtt)
  - [Description](#description)
  - [Prerequisites](#prerequisites)
- - [Usage](#usage)
-   - [Source](#source)
-   - [Variables](#variables)
+ - [Source](#source)
  - [Requirements](#requirements)
  - [Inputs](#inputs)
  - [Outputs](#outputs)
@@ -26,11 +24,8 @@ This is the module for you if:
 2. [Terraform 12 or higher](https://warrensbox.github.io/terraform-switcher/)  
 3. AWS account with an automation role for Terraform to use on your behalf
 
-## Usage
-
-First you'll need to decide which version to use. I recommend using the [latest release tag](https://github.com/Justinon/terraform-aws-foundryvtt/releases) if you can. Otherwise, search for the one that suits you.
-
-### Source  
+## Source  
+First you'll need to decide which version to use. I recommend using the [latest release tag](https://github.com/Justinon/terraform-aws-foundryvtt/releases) if you can. Otherwise, search for the one that suits you.  
 You can create the module with the source and version of choice using either SSH or HTTPS:
 
 SSH:
@@ -47,17 +42,6 @@ module "foundryvtt_example" {
   ...
 }
 ```
-
-### Variables  
-At minimum, *terraform-aws-foundryvtt* requires the following variables:  
-1. `aws_account_id`: The AWS account ID to which Terraform will deploy resources  
-2. `aws_automation_role_arn`: The ARN of the role used by Terraform to act on your behalf  
-3. `foundry_password`: The Foundry password used by the server to obtain your license  
-4. `foundry_username`: The Foundry username used by the server to obtain your license  
-5. `home_ip_address`: The IP address from which the server will allow SSH access  
-6. `region`: The AWS region in which Terraform will deploy resources
-
-For more variables, checkout the [Input section](#input) below.
 
 ## Requirements
 

@@ -66,7 +66,8 @@ variable foundryvtt_docker_image {
 }
 
 variable home_ip_address {
-  description = "The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance."
+  default     = ""
+  description = "Only required if using populating ssh_key_name variable: The public IP address of your home network, the only IP allowed to SSH to the Foundry server instance."
   type        = string
 }
 
@@ -95,7 +96,7 @@ variable tags {
 }
 
 variable vpc_cidr_block {
-  description = "The CIDR block of the Foundry VPC housing all created and eligible resources."
   default     = "20.0.0.0/16"
+  description = "The CIDR block of the Foundry VPC housing all created and eligible resources."
   type        = string
 }

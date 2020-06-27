@@ -58,12 +58,12 @@ module "foundryvtt_example" {
 | aws\_automation\_role\_arn | The automation role used by Terraform. Gets decrypt/encrypt access to KMS credentials key. | `string` | n/a | yes |
 | foundry\_password | Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license. | `string` | n/a | yes |
 | foundry\_username | Will be encrypted in AWS Parameter Store for exclusive use by the server to securely obtain and use the Foundry license. | `string` | n/a | yes |
-| home\_ip\_address | The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance. | `string` | n/a | yes |
 | artifacts\_bucket\_public | Whether or not the artifacts bucket should be public. To reuse this bucket for direct Amazon S3 asset storage in browser, set to true. | `bool` | `false` | no |
 | artifacts\_data\_expiration\_days | The amount of days after which non-current version of the artifacts bucket Foundry data is expired. | `number` | `30` | no |
 | ebs\_block\_devices | Should you want to mount any ebs block devices, such as for data storage, do so here. | <pre>list(object({<br>    device_name = string<br>  }))</pre> | `[]` | no |
 | foundry\_admin\_key | The Admin Access Key to set for password-protecting administration access to the Foundry tool. Will be encrypted in AWS Parameter Store for exclusive use by the server. | `string` | `""` | no |
 | foundryvtt\_docker\_image | Probably won't work with other images yet but the option is there if you want to experiment | `string` | `"felddy/foundryvtt:latest"` | no |
+| home\_ip\_address | Only required if using populating ssh\_key\_name variable: The public IP address of your home network, the only IP allowed to SSH to the Foundry server instance. | `string` | `""` | no |
 | instance\_type | The instance type on which the Foundry server runs. Defaults to free tier eligible type. | `string` | `"t2.micro"` | no |
 | security\_groups | Any extra security groups to associate with the Foundry server. | `list` | `[]` | no |
 | ssh\_key\_name | The name of the SSH key to use for Foundry server access, which only your home\_ip\_address will have. Can be easily be generated as a key-pair in the AWS console. | `string` | `""` | no |

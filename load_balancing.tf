@@ -1,7 +1,3 @@
-locals {
-  foundry_port = 30000
-}
-
 resource "aws_security_group" "foundry_load_balancer" {
   name_prefix            = "foundry-lb-sg-${terraform.workspace}"
   revoke_rules_on_delete = true
@@ -43,7 +39,7 @@ resource "aws_lb" "foundry_server" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.foundry_load_balancer.id]
-  subnets            = [aws_subnet.foundry_public_first.id, aws_subnet.foundry_public_second.id]
+  subnets            = local.subnet_public_ids
   tags               = local.tags_rendered
 }
 
@@ -100,29 +96,36 @@ resource "aws_lb_listener" "foundry_server_http" {
 # }
 
 output lb_arn {
-  value = aws_lb.foundry_server.arn
+  description = "The ARN of the application load balancer in front of the ASG serving the Foundry instance."
+  value       = aws_lb.foundry_server.arn
 }
 
 output lb_dns_name {
-  value = aws_lb.foundry_server.dns_name
+  description = "The main entrypoint to the Foundry tool for users and GMs. Is the DNS name of the application load balancer in front of the ASG serving the Foundry instance. Can be used with Route53."
+  value       = aws_lb.foundry_server.dns_name
 }
 
 output lb_zone_id {
-  value = aws_lb.foundry_server.zone_id
+  description = "The Route53 zone ID of the application load balancer in front of the ASG serving the Foundry instance."
+  value       = aws_lb.foundry_server.zone_id
 }
 
 output target_group_http_arn {
-  value = aws_lb_target_group.lb_foundry_server_http.arn
+  description = "The ARN of the HTTP target group receiving traffic from the HTTP ALB listener."
+  value       = aws_lb_target_group.lb_foundry_server_http.arn
 }
 
 output target_group_http_name {
-  value = aws_lb_target_group.lb_foundry_server_http.name
+  description = "The name of the HTTP target group receiving traffic from the HTTP ALB listener."
+  value       = aws_lb_target_group.lb_foundry_server_http.name
 }
 
 output target_group_https_arn {
-  value = aws_lb_target_group.lb_foundry_server_https.arn
+  description = "The ARN of the HTTPS target group receiving traffic from the HTTPS ALB listener."
+  value       = aws_lb_target_group.lb_foundry_server_https.arn
 }
 
 output target_group_https_name {
-  value = aws_lb_target_group.lb_foundry_server_https.name
+  description = "The name of the HTTPS target group receiving traffic from the HTTPS ALB listener."
+  value       = aws_lb_target_group.lb_foundry_server_https.name
 }

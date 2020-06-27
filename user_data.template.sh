@@ -3,6 +3,7 @@
 architecture="${architecture}"
 artifacts_bucket="${foundry_artifacts_bucket}"
 foundry_docker_image="${foundry_docker_image}"
+foundry_port="${foundry_port}"
 operating_system="${operating_system}"
 region="${region}"
 terraform_workspace="${terraform_workspace}"
@@ -60,7 +61,7 @@ start_server() {
     --env FOUNDRY_PASSWORD="$${foundry_pass}" \
     --env FOUNDRY_ADMIN_KEY="$${foundry_admin_key}" \
     --env FOUNDRY_AWS_CONFIG=true \
-    --publish 30000:30000/tcp \
+    --publish $${foundry_port}:$${foundry_port}/tcp \
     --volume /data:/data \
     $${foundry_docker_image}
 }

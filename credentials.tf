@@ -68,7 +68,7 @@ resource "aws_ssm_parameter" "foundry_password" {
 }
 
 resource "aws_ssm_parameter" "foundry_admin_key" {
-  count       = var.foundry_admin_key == "none" ? 0 : 1
+  count       = var.foundry_admin_key == "" ? 0 : 1
   description = "Used exclusively by the foundry server to configure the foundry tool."
   key_id      = aws_kms_key.foundry_server_credentials.arn
   name        = "/foundryvtt-terraform/${terraform.workspace}/admin_key"
@@ -78,9 +78,11 @@ resource "aws_ssm_parameter" "foundry_admin_key" {
 }
 
 output credentials_kms_key_arn {
-  value = aws_kms_key.foundry_server_credentials.arn
+  description = "The ARN of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively."
+  value       = aws_kms_key.foundry_server_credentials.arn
 }
 
 output credentials_kms_key_id {
-  value = aws_kms_key.foundry_server_credentials.key_id
+  description = "The ID of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively."
+  value       = aws_kms_key.foundry_server_credentials.key_id
 }

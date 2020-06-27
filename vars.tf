@@ -42,7 +42,7 @@ variable foundry_admin_key {
   type        = string
 }
 
-variable foundry_artifacts_bucket_public {
+variable artifacts_bucket_public {
   default     = false
   description = "Whether or not the artifacts bucket should be public. To reuse this bucket for direct Amazon S3 asset storage in browser, set to true."
 }

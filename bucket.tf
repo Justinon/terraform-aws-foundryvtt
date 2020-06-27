@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "foundry_artifacts" {
   tags          = local.tags_rendered
 
   dynamic "cors_rule" {
-    for_each = var.foundry_artifacts_bucket_public ? [{}] : []
+    for_each = var.artifacts_bucket_public ? [{}] : []
     content {
       allowed_headers = ["*"]
       allowed_methods = ["GET", "POST", "HEAD"]
@@ -37,7 +37,7 @@ resource "aws_s3_bucket" "foundry_artifacts" {
 }
 
 resource "aws_s3_bucket_public_access_block" "foundry_artifacts_private" {
-  count = var.foundry_artifacts_bucket_public ? 0 : 1
+  count = var.artifacts_bucket_public ? 0 : 1
 
   block_public_acls       = true
   block_public_policy     = true

@@ -13,10 +13,6 @@ data "aws_iam_policy" "amazon_ecs_service_role" {
   arn = "arn:aws:iam::aws:policy/aws-service-role/AmazonECSServiceRolePolicy"
 }
 
-data "aws_iam_role" "ecs_service" {
-  name = "AWSServiceRoleForECS"
-}
-
 resource "aws_iam_role_policy_attachment" "ecs_service" {
   role       = "AWSServiceRoleForECS"
   policy_arn = data.aws_iam_policy.amazon_ecs_service_role.arn

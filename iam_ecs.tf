@@ -21,5 +21,5 @@ data "aws_iam_policy" "amazon_ecs_service_role" {
 resource "aws_iam_role_policy_attachment" "ecs_service" {
   role       = "AWSServiceRoleForECS"
   policy_arn = data.aws_iam_policy.amazon_ecs_service_role.arn
-  #depends_on = [aws_iam_service_linked_role.ecs]
+  depends_on = [aws_ecs_cluster.foundry_server]
 }

@@ -11,6 +11,19 @@ data "aws_iam_policy_document" "foundry_server_assume_role" {
 
 data "aws_iam_policy_document" "foundry_server" {
   statement {
+    sid = "ECSExecution"
+    actions = [
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+    ]
+    resources = [
+      "*"
+    ]
+  }
+
+  statement {
     sid = "CloudwatchLogAccess"
     actions = [
       "logs:CreateLog*",

@@ -50,7 +50,6 @@ resource "aws_ecs_service" "foundry_server" {
   health_check_grace_period_seconds = 120
   launch_type                       = "FARGATE"
   name                              = "foundry-server-${terraform.workspace}"
-  tags                              = local.tags_rendered
   task_definition                   = aws_ecs_task_definition.foundry_server.arn
 
   lifecycle {

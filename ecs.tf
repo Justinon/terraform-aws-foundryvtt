@@ -1,15 +1,20 @@
 locals {
-#   ecs_secrets_base = [
-#     {
-#       name      = "FOUNDRY_USERNAME"
-#       valueFrom = aws_ssm_parameter.foundry_username.arn
-#     },
-#     {
-#       name      = "FOUNDRY_PASSWORD"
-#       valueFrom = aws_ssm_parameter.foundry_password.arn
-#     }
-#   ]
-#   ecs_secrets_foundry_admin_key = length(aws_ssm_parameter.foundry_password) > 0 ? list(element(aws_ssm_parameter.foundry_admin_key.*.arn, 0)) : list("")
+  #   ecs_secrets_base = [
+  #     {
+  #       name      = "FOUNDRY_USERNAME"
+  #       valueFrom = aws_ssm_parameter.foundry_username.arn
+  #     },
+  #     {
+  #       name      = "FOUNDRY_PASSWORD"
+  #       valueFrom = aws_ssm_parameter.foundry_password.arn
+  #     }
+  #   ]
+  #   ecs_secrets_foundry_admin_key = length(aws_ssm_parameter.foundry_password) > 0 ? list(element(aws_ssm_parameter.foundry_admin_key.*.arn, 0)) : list("")
+
+  ecs_secrets_foundry_admin_key = length(aws_ssm_parameter.foundry_admin_key) > 0 ? {
+    name      = "FOUNDRY_ADMIN_KEY"
+    valueFrom = aws_ssm_parameter.foundry_admin_key.arn
+  } : null
 
   docker_compose_foundry_document = {
     image = var.foundryvtt_docker_image
@@ -28,11 +33,7 @@ locals {
         name      = "FOUNDRY_PASSWORD"
         valueFrom = aws_ssm_parameter.foundry_password.arn
       },
-      {
-        for key in aws_ssm_parameter.foundry_admin_key:
-        name => "FOUNDRY_ADMIN_KEY"
-        valueFrom => key.arn
-      }
+      local.ecs_secrets_foundry_admin_key
     ]
   }
 

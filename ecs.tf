@@ -10,7 +10,7 @@ locals {
     logConfiguration = {
       logDriver = "awslogs",
       options = {
-        awslogs-create-group  = true
+        awslogs-create-group  = "true"
         awslogs-group         = "foundry-server-${terraform.workspace}"
         awslogs-region        = local.region
         awslogs-stream-prefix = "ecs-container"

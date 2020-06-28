@@ -161,17 +161,15 @@ resource "aws_efs_access_point" "foundry_server_data" {
   root_directory {
     path = "/data"
     creation_info {
-      #owner_gid   = local.ecs_container_foundry_user_and_group_id
-      #owner_uid   = local.ecs_container_foundry_user_and_group_id
-      owner_gid   = 1000
-      owner_uid   = 1000
+      owner_gid   = local.ecs_container_foundry_user_and_group_id
+      owner_uid   = local.ecs_container_foundry_user_and_group_id
       permissions = "770"
     }
   }
-  posix_user {
-    gid = local.ecs_container_foundry_user_and_group_id
-    uid = local.ecs_container_foundry_user_and_group_id
-  }
+#   posix_user {
+#     gid = local.ecs_container_foundry_user_and_group_id
+#     uid = local.ecs_container_foundry_user_and_group_id
+#   }
 }
 
 resource "aws_security_group" "foundry_data_mount" {

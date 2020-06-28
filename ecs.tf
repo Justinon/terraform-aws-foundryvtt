@@ -101,11 +101,6 @@ resource "aws_ecs_task_definition" "foundry_server" {
       }
     }
   }
-
-  placement_constraints {
-    type       = "memberOf"
-    expression = "attribute:ecs.availability-zone in ${local.ecs_container_availability_zones_stringified}"
-  }
 }
 
 resource "aws_efs_file_system" "foundry_server_data" {

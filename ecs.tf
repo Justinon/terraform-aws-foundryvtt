@@ -167,8 +167,8 @@ resource "aws_efs_access_point" "foundry_server_data" {
     }
   }
   posix_user {
-    gid = local.ecs_container_foundry_user_and_group_id
-    uid = local.ecs_container_foundry_user_and_group_id
+    gid = 1000
+    uid = 1000
   }
 }
 
@@ -198,13 +198,13 @@ resource "aws_security_group_rule" "foundry_data_mount_allow_outbound" {
 }
 
 resource "aws_efs_mount_target" "foundry_subnet_first" {
-  file_system_id  = "${aws_efs_file_system.foundry_server_data.id}"
+  file_system_id  = aws_efs_file_system.foundry_server_data.id
   security_groups = [aws_security_group.foundry_data_mount.id]
-  subnet_id       = "${aws_subnet.foundry_public_first.id}"
+  subnet_id       = aws_subnet.foundry_public_first.id
 }
 
 resource "aws_efs_mount_target" "foundry_subnet_second" {
-  file_system_id  = "${aws_efs_file_system.foundry_server_data.id}"
+  file_system_id  = aws_efs_file_system.foundry_server_data.id
   security_groups = [aws_security_group.foundry_data_mount.id]
-  subnet_id       = "${aws_subnet.foundry_public_second.id}"
+  subnet_id       = aws_subnet.foundry_public_second.id
 }

@@ -9,7 +9,7 @@ locals {
     name  = "foundry-server-${terraform.workspace}"
     mountPoints = [{
       containerPath = "/data/Data"
-      sourceVolume  = aws_ecs_task_definition.foundry_server.volume[0].name
+      sourceVolume  = "foundry-data"
     }]
     portMappings = [{
       hostPort      = local.foundry_port

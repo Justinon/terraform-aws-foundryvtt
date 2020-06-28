@@ -1,1 +1,1 @@
-Error: Missing key/value separator: Expected an equals sign ("=") to mark the beginning of the attribute value.
+Error: Invalid 'for' expression: Extra characters after the end of the 'for' expression.

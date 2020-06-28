@@ -47,7 +47,6 @@ resource "aws_ecs_cluster" "foundry_server" {
 resource "aws_ecs_service" "foundry_server" {
   cluster                           = aws_ecs_cluster.foundry_server.id
   desired_count                     = 1
-  enable_ecs_managed_tags           = true
   health_check_grace_period_seconds = 120
   launch_type                       = "FARGATE"
   name                              = "foundry-server-${terraform.workspace}"

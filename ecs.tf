@@ -16,7 +16,7 @@ locals {
     valueFrom = element(aws_ssm_parameter.foundry_admin_key.*.arn, 0)
   } : null
 
-  docker_compose_foundry_document = {
+  ecs_container_definition_foundry_server = [{
     image = var.foundryvtt_docker_image
     name  = "foundry-server-${terraform.workspace}"
     portMappings = [{
@@ -35,7 +35,7 @@ locals {
       },
       local.ecs_secrets_foundry_admin_key
     ]
-  }
+  }]
 
   ecs_container_availability_zones_stringified = format("[%s]", join(", ", local.server_availability_zones))
   ecs_container_foundry_user_and_group_id      = 421
@@ -92,7 +92,7 @@ resource "aws_ecs_service" "foundry_server" {
 
 resource "aws_ecs_task_definition" "foundry_server" {
   cpu                   = 2
-  container_definitions = jsonencode(local.docker_compose_foundry_document)
+  container_definitions = jsonencode(local.ecs_container_definition_foundry_server)
   execution_role_arn    = aws_iam_role.foundry_server.arn
   family                = "foundry-server-${terraform.workspace}"
   memory                = 1024

@@ -85,6 +85,7 @@ resource "aws_ecs_task_definition" "foundry_server" {
   execution_role_arn       = aws_iam_role.foundry_server.arn
   family                   = "foundry-server-${terraform.workspace}"
   memory                   = 2048
+  network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   tags                     = local.tags_rendered
   task_role_arn            = aws_iam_role.foundry_server.arn

@@ -80,11 +80,11 @@ resource "aws_ecs_service" "foundry_server" {
 }
 
 resource "aws_ecs_task_definition" "foundry_server" {
-  cpu                      = 2
+  cpu                      = 1024
   container_definitions    = jsonencode(local.ecs_container_definition_foundry_server)
   execution_role_arn       = aws_iam_role.foundry_server.arn
   family                   = "foundry-server-${terraform.workspace}"
-  memory                   = 1024
+  memory                   = 2048
   requires_compatibilities = ["FARGATE"]
   tags                     = local.tags_rendered
   task_role_arn            = aws_iam_role.foundry_server.arn

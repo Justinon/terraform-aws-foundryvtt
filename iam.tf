@@ -1,10 +1,10 @@
 data "aws_iam_policy_document" "foundry_server_assume_role" {
   statement {
-    sid     = "EC2ServiceAccess"
+    sid     = "ECSTaskAccess"
     actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
+      identifiers = ["ecs-tasks.amazonaws.com"]
     }
   }
 }

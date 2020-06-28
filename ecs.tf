@@ -7,6 +7,14 @@ locals {
   ecs_container_definition_foundry_server = [{
     image = var.foundryvtt_docker_image
     name  = "foundry-server-${terraform.workspace}"
+    logConfiguration = {
+      logDriver = "awslogs",
+      options = {
+        awslogs-group         = "foundry-server-${terraform.workspace}"
+        awslogs-region        = var.region
+        awslogs-stream-prefix = "ecs-container"
+      }
+    }
     mountPoints = [{
       containerPath = "/data/Data"
       sourceVolume  = "foundry-data"

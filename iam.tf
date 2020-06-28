@@ -11,6 +11,18 @@ data "aws_iam_policy_document" "foundry_server_assume_role" {
 
 data "aws_iam_policy_document" "foundry_server" {
   statement {
+    sid = "CloudwatchLogAccess"
+    actions = [
+      "logs:CreateLog*",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents",
+    ]
+    resources = [
+      "arn:aws:logs:*:*:*"
+    ]
+  }
+
+  statement {
     sid = "AllowFoundryCredentialsKMSAccess"
     actions = [
       "kms:Decrypt",

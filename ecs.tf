@@ -30,8 +30,8 @@ locals {
       },
       {
         for key in aws_ssm_parameter.foundry_admin_key :
-            name => "FOUNDRY_ADMIN_KEY"
-            valueFrom => key.arn
+          "name" => "FOUNDRY_ADMIN_KEY"
+          "valueFrom" => key.arn
       }
     ]
   }

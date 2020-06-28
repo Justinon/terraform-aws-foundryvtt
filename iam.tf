@@ -81,8 +81,7 @@ data "aws_iam_policy_document" "foundry_server" {
       "s3:PutObject*"
     ]
     resources = [
-      #"${aws_s3_bucket.foundry_artifacts.arn}/data/${terraform.workspace}/*"
-      "${aws_s3_bucket.foundry_artifacts.arn}/*"
+      "${aws_s3_bucket.foundry_artifacts.arn}/data/${terraform.workspace}/*"
     ]
   }
 

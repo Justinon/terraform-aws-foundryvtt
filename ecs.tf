@@ -161,8 +161,10 @@ resource "aws_efs_access_point" "foundry_server_data" {
   root_directory {
     path = "/data"
     creation_info {
-      owner_gid   = local.ecs_container_foundry_user_and_group_id
-      owner_uid   = local.ecs_container_foundry_user_and_group_id
+      #owner_gid   = local.ecs_container_foundry_user_and_group_id
+      #owner_uid   = local.ecs_container_foundry_user_and_group_id
+      owner_gid   = 1000
+      owner_uid   = 1000
       permissions = "770"
     }
   }

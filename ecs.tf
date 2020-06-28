@@ -1,12 +1,40 @@
 locals {
+#   ecs_secrets_base = [
+#     {
+#       name      = "FOUNDRY_USERNAME"
+#       valueFrom = aws_ssm_parameter.foundry_username.arn
+#     },
+#     {
+#       name      = "FOUNDRY_PASSWORD"
+#       valueFrom = aws_ssm_parameter.foundry_password.arn
+#     }
+#   ]
+#   ecs_secrets_foundry_admin_key = length(aws_ssm_parameter.foundry_password) > 0 ? list(element(aws_ssm_parameter.foundry_admin_key.*.arn, 0)) : list("")
+
   docker_compose_foundry_document = {
-    version = "3.8"
-    services = {
-      foundry_server = {
-        image          = var.foundryvtt_docker_image
-        container_name = "foundry-server"
+    image = var.foundryvtt_docker_image
+    name  = "foundry-server-${terraform.workspace}"
+    portMappings = [{
+      hostPort      = local.foundry_port
+      protocol      = "tcp"
+      containerPort = local.foundry_port
+    }]
+    secrets = [
+      {
+        name      = "FOUNDRY_USERNAME"
+        valueFrom = aws_ssm_parameter.foundry_username.arn
+      },
+      {
+        name      = "FOUNDRY_PASSWORD"
+        valueFrom = aws_ssm_parameter.foundry_password.arn
+      },
+      {
+        for key in aws_ssm_parameter.foundry_admin_key : {
+            name => "FOUNDRY_ADMIN_KEY"
+            valueFrom => key.arn
+        }
       }
-    }
+    ]
   }
 
   ecs_container_availability_zones_stringified = format("[%s]", join(", ", local.server_availability_zones))
@@ -63,9 +91,11 @@ resource "aws_ecs_service" "foundry_server" {
 }
 
 resource "aws_ecs_task_definition" "foundry_server" {
+  cpu                   = 2
   container_definitions = jsonencode(local.docker_compose_foundry_document)
   execution_role_arn    = aws_iam_role.foundry_server.arn
   family                = "foundry-server-${terraform.workspace}"
+  memory                = 1024
   tags                  = local.tags_rendered
   task_role_arn         = aws_iam_role.foundry_server.arn
 
@@ -138,7 +168,7 @@ resource "aws_efs_file_system_policy" "foundry_server_data" {
 }
 
 resource "aws_efs_access_point" "foundry_server_data" {
-  file_system_id = "${aws_efs_file_system.foundry_server_data.id}"
+  file_system_id = aws_efs_file_system.foundry_server_data.id
   root_directory {
     path = "/data"
     creation_info {

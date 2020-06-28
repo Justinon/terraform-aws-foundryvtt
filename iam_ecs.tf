@@ -15,7 +15,6 @@ data "aws_iam_policy" "amazon_ecs_service_role" {
 
 resource "aws_iam_service_linked_role" "ecs_service" {
   aws_service_name = "ecs.amazonaws.com"
-  custom_suffix      = "foundry-ecs-service-${terraform.workspace}"
   description      = "Starts with the requirements for the ecs service to function."
 }
 

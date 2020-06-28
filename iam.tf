@@ -74,20 +74,9 @@ data "aws_iam_policy_document" "foundry_server" {
   }
 
   statement {
-    sid = "EFSFoundryDataMountAccess"
-    actions = [
-      "elasticfilesystem:ClientMount",
-    ]
-    condition {
-      test     = "Bool"
-      variable = "aws:SecureTransport"
-      values   = ["true"]
-    }
-  }
-
-  statement {
     sid = "EFSFoundryDataWriteAccess"
     actions = [
+      "elasticfilesystem:ClientMount",
       "elasticfilesystem:ClientWrite"
     ]
     condition {

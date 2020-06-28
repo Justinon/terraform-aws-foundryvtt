@@ -106,10 +106,10 @@ resource "aws_autoscaling_group" "foundry_server" {
   name_prefix          = "foundry-server-asg-${terraform.workspace}"
   vpc_zone_identifier  = local.subnet_public_ids
 
-  target_group_arns = [
-    aws_lb_target_group.lb_foundry_server_http.arn,
-    aws_lb_target_group.lb_foundry_server_https.arn,
-  ]
+  # target_group_arns = [
+  #   aws_lb_target_group.lb_foundry_server_http.arn,
+  #   aws_lb_target_group.lb_foundry_server_https.arn,
+  # ]
 
   tag {
     key                 = "Name"

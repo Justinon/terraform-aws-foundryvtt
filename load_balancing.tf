@@ -75,6 +75,7 @@ resource "aws_lb_listener" "foundry_server_http" {
   load_balancer_arn = aws_lb.foundry_server.arn
   port              = aws_security_group_rule.lb_allow_inbound_80.to_port
   protocol          = aws_lb_target_group.lb_foundry_server_http.protocol
+  target_type       = "ip"
 
   default_action {
     type             = "forward"

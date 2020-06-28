@@ -49,7 +49,7 @@ resource "aws_ecs_service" "foundry_server" {
   desired_count                     = 1
   enable_ecs_managed_tags           = true
   health_check_grace_period_seconds = 120
-  iam_role                          = aws_iam_role.ecs_service.arn
+  iam_role                          = aws_iam_service_linked_role.ecs_service.arn
   launch_type                       = "FARGATE"
   name                              = "foundry-server-${terraform.workspace}"
   propagate_tags                    = "TASK_DEFINITION"
@@ -83,13 +83,14 @@ resource "aws_ecs_service" "foundry_server" {
 }
 
 resource "aws_ecs_task_definition" "foundry_server" {
-  cpu                   = 2
-  container_definitions = jsonencode(local.ecs_container_definition_foundry_server)
-  execution_role_arn    = aws_iam_role.foundry_server.arn
-  family                = "foundry-server-${terraform.workspace}"
-  memory                = 1024
-  tags                  = local.tags_rendered
-  task_role_arn         = aws_iam_role.foundry_server.arn
+  cpu                      = 2
+  container_definitions    = jsonencode(local.ecs_container_definition_foundry_server)
+  execution_role_arn       = aws_iam_role.foundry_server.arn
+  family                   = "foundry-server-${terraform.workspace}"
+  memory                   = 1024
+  requires_compatibilities = ["FARGATE"]
+  tags                     = local.tags_rendered
+  task_role_arn            = aws_iam_role.foundry_server.arn
 
   volume {
     name = "foundry-data"

@@ -61,7 +61,7 @@ resource "aws_ecs_service" "foundry_server" {
       desired_count
     ]
   }
-  
+
   load_balancer {
     target_group_arn = aws_lb_target_group.lb_foundry_server_http.arn
     container_name   = "foundry-server-${terraform.workspace}"
@@ -71,7 +71,7 @@ resource "aws_ecs_service" "foundry_server" {
   network_configuration {
     assign_public_ip = true
     security_groups  = [aws_security_group.foundry_server.id]
-    subnets          = local.subnets_public_ids
+    subnets          = local.subnet_public_ids
   }
 
   ordered_placement_strategy {

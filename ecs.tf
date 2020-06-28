@@ -78,7 +78,6 @@ resource "aws_ecs_service" "foundry_server" {
       desired_count
     ]
   }
-  depends_on = [aws_iam_role_policy_attachment.ecs_service]
 }
 
 resource "aws_ecs_task_definition" "foundry_server" {

@@ -166,10 +166,10 @@ resource "aws_efs_access_point" "foundry_server_data" {
       permissions = "770"
     }
   }
-#   posix_user {
-#     gid = local.ecs_container_foundry_user_and_group_id
-#     uid = local.ecs_container_foundry_user_and_group_id
-#   }
+  posix_user {
+    gid = local.ecs_container_foundry_user_and_group_id
+    uid = local.ecs_container_foundry_user_and_group_id
+  }
 }
 
 resource "aws_security_group" "foundry_data_mount" {

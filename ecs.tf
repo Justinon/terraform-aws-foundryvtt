@@ -90,6 +90,12 @@ resource "aws_ecs_task_definition" "foundry_server" {
   tags                     = local.tags_rendered
   task_role_arn            = aws_iam_role.foundry_server.arn
 
+  network_configuration {
+    assign_public_ip = true
+    security_groups  = [aws_security_group.foundry_server.id]
+    subnets          = local.subnets_public_ids
+  }
+
   volume {
     name = "foundry-data"
     efs_volume_configuration {

@@ -49,7 +49,7 @@ resource "aws_ecs_service" "foundry_server" {
   desired_count                     = 1
   enable_ecs_managed_tags           = true
   health_check_grace_period_seconds = 120
-  iam_role                          = data.aws_iam_role.ecs_service.arn
+  iam_role                          = "arn:aws:iam::${var.aws_account_id}:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
   launch_type                       = "FARGATE"
   name                              = "foundry-server-${terraform.workspace}"
   propagate_tags                    = "TASK_DEFINITION"

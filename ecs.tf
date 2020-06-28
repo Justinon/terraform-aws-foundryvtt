@@ -13,7 +13,7 @@ locals {
 
   ecs_secrets_foundry_admin_key = length(aws_ssm_parameter.foundry_admin_key) > 0 ? {
     name      = "FOUNDRY_ADMIN_KEY"
-    valueFrom = aws_ssm_parameter.foundry_admin_key.arn
+    valueFrom = element(aws_ssm_parameter.foundry_admin_key.*.arn, 0)
   } : null
 
   docker_compose_foundry_document = {

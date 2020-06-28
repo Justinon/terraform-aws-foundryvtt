@@ -171,3 +171,40 @@ resource "aws_efs_access_point" "foundry_server_data" {
     uid = local.ecs_container_foundry_user_and_group_id
   }
 }
+
+resource "aws_security_group" "foundry_data_mount" {
+  name_prefix            = "foundry-data-mount-sg-${terraform.workspace}"
+  revoke_rules_on_delete = true
+  tags                   = local.tags_rendered
+  vpc_id                 = aws_vpc.foundry.id
+}
+
+resource "aws_security_group_rule" "foundry_data_mount_allow_nfs" {
+  from_port                = 2049
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.foundry_data_mount.id
+  source_security_group_id = aws_security_group.foundry_server.id
+  to_port                  = 2049
+  type                     = "ingress"
+}
+
+resource "aws_security_group_rule" "foundry_data_mount_allow_outbound" {
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 0
+  protocol          = "tcp"
+  security_group_id = aws_security_group.foundry_data_mount.id
+  to_port           = 65535
+  type              = "egress"
+}
+
+resource "aws_efs_mount_target" "foundry_subnet_first" {
+  file_system_id = "${aws_efs_file_system.foundry_server_data.id}"
+  subnet_id      = "${aws_subnet.foundry_public_first.id}"
+  security_groups = [aws_security_group.foundry_data_mount.id]
+}
+
+resource "aws_efs_mount_target" "foundry_subnet_second" {
+  file_system_id = "${aws_efs_file_system.foundry_server_data.id}"
+  subnet_id      = "${aws_subnet.foundry_public_second.id}"
+  security_groups = [aws_security_group.foundry_data_mount.id]
+}

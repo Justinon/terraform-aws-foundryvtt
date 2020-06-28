@@ -167,8 +167,8 @@ resource "aws_efs_access_point" "foundry_server_data" {
     }
   }
   posix_user {
-    gid = 1000
-    uid = 1000
+    gid = local.ecs_container_foundry_user_and_group_id
+    uid = local.ecs_container_foundry_user_and_group_id
   }
 }
 

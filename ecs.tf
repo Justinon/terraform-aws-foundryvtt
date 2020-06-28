@@ -55,27 +55,33 @@ resource "aws_ecs_service" "foundry_server" {
   tags                              = local.tags_rendered
   task_definition                   = aws_ecs_task_definition.foundry_server.arn
 
-  ordered_placement_strategy {
-    type  = "binpack"
-    field = "cpu"
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes = [
+      desired_count
+    ]
   }
-
+  
   load_balancer {
     target_group_arn = aws_lb_target_group.lb_foundry_server_http.arn
     container_name   = "foundry-server-${terraform.workspace}"
     container_port   = local.foundry_port
   }
 
+  network_configuration {
+    assign_public_ip = true
+    security_groups  = [aws_security_group.foundry_server.id]
+    subnets          = local.subnets_public_ids
+  }
+
+  ordered_placement_strategy {
+    type  = "binpack"
+    field = "cpu"
+  }
+
   placement_constraints {
     type       = "memberOf"
     expression = "attribute:ecs.availability-zone in ${local.ecs_container_availability_zones_stringified}"
-  }
-
-  lifecycle {
-    create_before_destroy = true
-    ignore_changes = [
-      desired_count
-    ]
   }
 }
 
@@ -89,12 +95,6 @@ resource "aws_ecs_task_definition" "foundry_server" {
   requires_compatibilities = ["FARGATE"]
   tags                     = local.tags_rendered
   task_role_arn            = aws_iam_role.foundry_server.arn
-
-  network_configuration {
-    assign_public_ip = true
-    security_groups  = [aws_security_group.foundry_server.id]
-    subnets          = local.subnets_public_ids
-  }
 
   volume {
     name = "foundry-data"

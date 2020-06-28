@@ -29,9 +29,9 @@ locals {
         valueFrom = aws_ssm_parameter.foundry_password.arn
       },
       {
-        for key in aws_ssm_parameter.foundry_admin_key :
-          "name" => "FOUNDRY_ADMIN_KEY"
-          "valueFrom" => key.arn
+        for key in aws_ssm_parameter.foundry_admin_key:
+        name => "FOUNDRY_ADMIN_KEY"
+        valueFrom => key.arn
       }
     ]
   }

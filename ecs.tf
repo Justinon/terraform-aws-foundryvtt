@@ -73,11 +73,6 @@ resource "aws_ecs_service" "foundry_server" {
     security_groups  = [aws_security_group.foundry_server.id]
     subnets          = local.subnet_public_ids
   }
-
-  placement_constraints {
-    type       = "memberOf"
-    expression = "attribute:ecs.availability-zone in ${local.ecs_container_availability_zones_stringified}"
-  }
 }
 
 resource "aws_ecs_task_definition" "foundry_server" {

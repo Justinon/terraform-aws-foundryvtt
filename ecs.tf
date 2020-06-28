@@ -74,11 +74,6 @@ resource "aws_ecs_service" "foundry_server" {
     subnets          = local.subnet_public_ids
   }
 
-  ordered_placement_strategy {
-    type  = "binpack"
-    field = "cpu"
-  }
-
   placement_constraints {
     type       = "memberOf"
     expression = "attribute:ecs.availability-zone in ${local.ecs_container_availability_zones_stringified}"

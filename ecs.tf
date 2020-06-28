@@ -163,7 +163,7 @@ resource "aws_efs_access_point" "foundry_server_data" {
     creation_info {
       owner_gid   = local.ecs_container_foundry_user_and_group_id
       owner_uid   = local.ecs_container_foundry_user_and_group_id
-      permissions = "777"
+      permissions = "770"
     }
   }
   posix_user {

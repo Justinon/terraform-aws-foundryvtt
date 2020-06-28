@@ -19,6 +19,10 @@ locals {
   ecs_container_definition_foundry_server = [{
     image = var.foundryvtt_docker_image
     name  = "foundry-server-${terraform.workspace}"
+    mountPoints = [{
+      containerPath = "/data/Data"
+      sourceVolume  = aws_ecs_task_definition.foundry_server.volume[0].name
+    }]
     portMappings = [{
       hostPort      = local.foundry_port
       protocol      = "tcp"

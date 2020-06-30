@@ -69,8 +69,8 @@ resource "aws_route" "foundry_nat_gw" {
 }
 
 resource "aws_eip" "nat" {
-  vpc  = aws_vpc.foundry.id
   tags = merge(local.tags_rendered, map("Name", "foundry-nat-${terraform.workspace}"))
+  vpc  = true
 }
 
 resource "aws_nat_gateway" "foundry" {

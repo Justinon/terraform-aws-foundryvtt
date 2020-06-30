@@ -33,7 +33,7 @@ resource "aws_subnet" "foundry_publics" {
   availability_zone = element(local.server_availability_zones, count.index)
   cidr_block        = element(local.subnet_cidrs_public, count.index)
   tags              = merge(local.tags_rendered, map("Name", format("foundry-public-%d-${terraform.workspace}", count.index)))
-  vpc_id            = aws_vpc.foundry_id
+  vpc_id            = aws_vpc.foundry.id
 }
 
 resource "aws_subnet" "foundry_privates" {
@@ -41,7 +41,7 @@ resource "aws_subnet" "foundry_privates" {
   availability_zone = element(local.server_availability_zones, count.index)
   cidr_block        = element(local.subnet_cidrs_private, count.index)
   tags              = merge(local.tags_rendered, map("Name", format("foundry-private-%d-${terraform.workspace}", count.index)))
-  vpc_id            = aws_vpc.foundry_id
+  vpc_id            = aws_vpc.foundry.id
 }
 
 resource "aws_subnet" "foundry_public_first" {

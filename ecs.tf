@@ -228,14 +228,9 @@ resource "aws_security_group_rule" "foundry_data_mount_allow_outbound" {
   type              = "egress"
 }
 
-resource "aws_efs_mount_target" "foundry_subnet_first" {
+resource "aws_efs_mount_target" "private_subnets" {
+  count           = length(local.subnet_private_ids)
   file_system_id  = aws_efs_file_system.foundry_server_data.id
   security_groups = [aws_security_group.foundry_data_mount.id]
-  subnet_id       = aws_subnet.foundry_private_first.id
-}
-
-resource "aws_efs_mount_target" "foundry_subnet_second" {
-  file_system_id  = aws_efs_file_system.foundry_server_data.id
-  security_groups = [aws_security_group.foundry_data_mount.id]
-  subnet_id       = aws_subnet.foundry_private_second.id
+  subnet_id       = element(local.subnet_private_ids, count.index)
 }

@@ -14,12 +14,12 @@ locals {
     ]
   ])
 
-  subnet_private_arns = [aws_subnet.foundry_private.*.arn]
-  subnet_private_azs  = [aws_subnet.foundry_private.*.availability_zone]
-  subnet_private_ids  = [aws_subnet.foundry_private.*.id]
-  subnet_public_arns  = [aws_subnet.foundry_public.*.arn]
-  subnet_public_azs   = [aws_subnet.foundry_public.*.availability_zone]
-  subnet_public_ids   = [aws_subnet.foundry_public.*.id]
+  subnet_private_arns = [aws_subnet.foundry_privates.*.arn]
+  subnet_private_azs  = [aws_subnet.foundry_privates.*.availability_zone]
+  subnet_private_ids  = [aws_subnet.foundry_privates.*.id]
+  subnet_public_arns  = [aws_subnet.foundry_publics.*.arn]
+  subnet_public_azs   = [aws_subnet.foundry_publics.*.availability_zone]
+  subnet_public_ids   = [aws_subnet.foundry_publics.*.id]
 }
 
 resource "aws_vpc" "foundry" {

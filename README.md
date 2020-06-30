@@ -76,9 +76,6 @@ module "foundryvtt_example" {
 |------|-------------|
 | artifacts\_bucket\_arn | The ARN of the S3 bucket holding versioned Foundry data. |
 | artifacts\_bucket\_name | The name of the S3 bucket holding versioned Foundry data. |
-| asg\_arn | The ARN of the autoscaling group serving the Foundry instance. |
-| asg\_azs | The availability zones in which the autoscaling group serves the Foundry instance. |
-| asg\_id | The ID of the autoscaling group serving the Foundry instance. |
 | credentials\_kms\_key\_arn | The ARN of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively. |
 | credentials\_kms\_key\_id | The ID of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively. |
 | instance\_profile\_arn | The ARN of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
@@ -86,9 +83,6 @@ module "foundryvtt_example" {
 | instance\_profile\_name | The name of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
 | internet\_gateway\_arn | The ARN of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
 | internet\_gateway\_id | The ID of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
-| launch\_configuration\_arn | The ARN of the Foundry instance's launch configuration. |
-| launch\_configuration\_id | The ID of the Foundry instance's launch configuration. |
-| launch\_configuration\_name | The name of the Foundry instance's launch configuration. |
 | lb\_arn | The ARN of the application load balancer in front of the ASG serving the Foundry instance. |
 | lb\_dns\_name | The main entrypoint to the Foundry tool for users and GMs. Is the DNS name of the application load balancer in front of the ASG serving the Foundry instance. Can be used with Route53. |
 | lb\_zone\_id | The Route53 zone ID of the application load balancer in front of the ASG serving the Foundry instance. |
@@ -97,6 +91,9 @@ module "foundryvtt_example" {
 | policy\_name | The name of the policy attached to the Foundry server role. |
 | role\_arn | The ARN of the role the Foundry server uses to access credentials and the artifacts bucket. |
 | role\_name | The name of the role the Foundry server uses to access credentials and the artifacts bucket. |
+| subnet\_private\_arns | The ARN of the private subnets housing the fargate foundry task. |
+| subnet\_private\_azs | The availability zones of the private subnets housing the fargate foundry task. |
+| subnet\_private\_ids | The IDs of the private subnets housing the fargate foundry task. |
 | subnet\_public\_arns | The ARN of the public subnets housing the server autoscaling group and load balancer. |
 | subnet\_public\_azs | The availability zones of the public subnets housing the server autoscaling group and load balancer. |
 | subnet\_public\_ids | The IDs of the public subnets housing the server autoscaling group and load balancer. |
@@ -107,5 +104,6 @@ module "foundryvtt_example" {
 | vpc\_arn | The ARN of the Foundry VPC housing all created and eligible resources. |
 | vpc\_cidr\_block | The CIDR block of the Foundry VPC housing all created and eligible resources. |
 | vpc\_id | The ID of the Foundry VPC housing all created and eligible resources. |
-| vpc\_main\_route\_table\_id | The main and single route table for the Foundry VPC. |
+| vpc\_route\_table\_private\_id | The private route table for the Foundry VPC. |
+| vpc\_route\_table\_public\_id | The public route table for the Foundry VPC. |
 

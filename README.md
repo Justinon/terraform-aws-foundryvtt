@@ -62,7 +62,7 @@ module "foundryvtt_example" {
 | artifacts\_data\_expiration\_days | The amount of days after which non-current version of the artifacts bucket Foundry data is expired. | `number` | `30` | no |
 | ebs\_block\_devices | Should you want to mount any ebs block devices, such as for data storage, do so here. | <pre>list(object({<br>    device_name = string<br>  }))</pre> | `[]` | no |
 | foundry\_admin\_key | The Admin Access Key to set for password-protecting administration access to the Foundry tool. Will be encrypted in AWS Parameter Store for exclusive use by the server. | `string` | `""` | no |
-| foundryvtt\_docker\_image | Probably won't work with other images yet but the option is there if you want to experiment | `string` | `"felddy/foundryvtt:release"` | no |
+| foundryvtt\_docker\_image | Probably won't work with other images yet but the option is there if you want to experiment | `string` | `"felddy/foundryvtt:0.6.3"` | no |
 | instance\_type | The instance type on which the Foundry server runs. Defaults to free tier eligible type. | `string` | `"t2.micro"` | no |
 | security\_groups | Any extra security groups to associate with the Foundry server. | `list` | `[]` | no |
 | ssh\_ip\_address | The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance. Only required if populating ssh\_key\_name variable. | `string` | `""` | no |

@@ -87,7 +87,7 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "foundry" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.foundry_private_first.id
+  subnet_id     = aws_subnet.foundry_public_first.id
   tags          = merge(local.tags_rendered, map("Name", "foundry-nat-${terraform.workspace}"))
 }
 

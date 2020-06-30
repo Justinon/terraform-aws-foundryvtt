@@ -118,7 +118,7 @@ resource "aws_ecs_service" "foundry_server" {
   }
 
   network_configuration {
-    assign_public_ip = true
+    assign_public_ip = false
     security_groups  = [aws_security_group.foundry_server.id]
     subnets          = local.subnet_private_ids
   }

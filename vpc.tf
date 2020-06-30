@@ -2,15 +2,16 @@ locals {
   subnet_count_public  = 2
   subnet_count_private = 2
 
-  subnet_cidr_subnet_newbit = 24 - element(split("/", var.vpc_cidr_block), 1)
+  subnet_cidr_newbit = 24 - element(split("/", var.vpc_cidr_block), 1)
   subnet_cidrs_public = flatten([
     for index in range(local.subnet_count_public) : [
-      cidrsubnet(var.vpc_cidr_block, local.subnet_cidr_subnet_newbit, index)
+      cidrsubnet(var.vpc_cidr_block, local.subnet_cidr_newbit, index)
     ]
   ])
   subnet_cidrs_private = flatten([
-    for index in range(local.subnet_count_public, local.subnet_count_public + local.subnet_count_private) :
-    cidrsubnets(var.vpc_cidr_block, local.subnet_cidr_subnet_newbit, index)
+    for index in range(local.subnet_count_public, local.subnet_count_public + local.subnet_count_private) : [
+      cidrsubnet(var.vpc_cidr_block, local.subnet_cidr_newbit, index)
+    ]
   ])
 
   subnet_private_arns = [aws_subnet.foundry_private_first.arn, aws_subnet.foundry_private_second.arn]
@@ -28,7 +29,15 @@ resource "aws_vpc" "foundry" {
 }
 
 resource "aws_subnet" "foundry_publics" {
-  count             = local.subnet_count_public
+  count             = length(local.subnet_cidrs_public)
+  availability_zone = element(local.server_availability_zones, count.index)
+  cidr_block        = format("20.0.%d.0/24", count.index)
+  tags              = merge(local.tags_rendered, map("Name", format("foundry-public-%d-${terraform.workspace}", count.index)))
+  vpc_id            = aws_vpc.foundry_id
+}
+
+resource "aws_subnet" "foundry_privates" {
+  count             = length(local.subnet_cidrs_private)
   availability_zone = element(local.server_availability_zones, count.index)
   cidr_block        = format("20.0.%d.0/24", count.index)
   tags              = merge(local.tags_rendered, map("Name", format("foundry-public-%d-${terraform.workspace}", count.index)))

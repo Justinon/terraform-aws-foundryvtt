@@ -52,6 +52,7 @@ data "aws_iam_policy_document" "foundry_server" {
       "ecr:BatchCheckLayerAvailability",
       "ecr:GetDownloadUrlForLayer",
       "ecr:BatchGetImage",
+      "ssm:GetParameter*"
     ]
     resources = [
       "*"

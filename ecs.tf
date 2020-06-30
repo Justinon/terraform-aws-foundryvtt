@@ -55,17 +55,6 @@ resource "aws_security_group" "foundry_server" {
   vpc_id                 = aws_vpc.foundry.id
 }
 
-resource "aws_security_group_rule" "allow_ssh" {
-  count = var.ssh_key_name == "" ? 0 : 1
-
-  cidr_blocks       = ["${var.ssh_ip_address}/32"]
-  from_port         = 22
-  protocol          = "tcp"
-  security_group_id = aws_security_group.foundry_server.id
-  to_port           = 22
-  type              = "ingress"
-}
-
 resource "aws_security_group_rule" "allow_foundry_port_ingress" {
   from_port                = local.foundry_port
   protocol                 = "tcp"

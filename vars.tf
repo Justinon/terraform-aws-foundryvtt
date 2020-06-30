@@ -17,7 +17,7 @@ locals {
 data "aws_region" "current" {}
 
 variable artifacts_bucket_public {
-  default     = false
+  default     = true
   description = "Whether or not the artifacts bucket should be public. To reuse this bucket for direct Amazon S3 asset storage in browser, set to true."
 }
 
@@ -34,14 +34,6 @@ variable aws_account_id {
 variable aws_automation_role_arn {
   description = "The automation role used by Terraform. Gets decrypt/encrypt access to KMS credentials key."
   type        = string
-}
-
-variable ebs_block_devices {
-  default     = []
-  description = "Should you want to mount any ebs block devices, such as for data storage, do so here."
-  type = list(object({
-    device_name = string
-  }))
 }
 
 variable foundry_admin_key {
@@ -65,25 +57,9 @@ variable foundryvtt_docker_image {
   description = "Probably won't work with other images yet but the option is there if you want to experiment"
 }
 
-variable instance_type {
-  default     = "t2.micro"
-  description = "The instance type on which the Foundry server runs. Defaults to free tier eligible type."
-}
-
 variable security_groups {
   default     = []
   description = "Any extra security groups to associate with the Foundry server."
-}
-
-variable ssh_ip_address {
-  default     = ""
-  description = "The public IP address of your home network; the only IP allowed to SSH to the Foundry server instance. Only required if populating ssh_key_name variable."
-  type        = string
-}
-
-variable ssh_key_name {
-  default     = ""
-  description = "The name of the SSH key to use for Foundry server access. Must populate ssh_ip_address variable."
 }
 
 variable tags {
@@ -96,7 +72,7 @@ variable tags {
 }
 
 variable vpc_cidr_block {
-  default     = "20.0.0.0/16"
+  default     = "20.0.0.0/22"
   description = "The CIDR block of the Foundry VPC housing all created and eligible resources."
   type        = string
 }

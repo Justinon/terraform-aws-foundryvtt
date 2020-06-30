@@ -14,12 +14,8 @@ locals {
     ]
   ])
 
-  subnet_private_arns = [aws_subnet.foundry_privates.*.arn]
-  subnet_private_azs  = [aws_subnet.foundry_privates.*.availability_zone]
-  subnet_private_ids  = [aws_subnet.foundry_privates.*.id]
-  subnet_public_arns  = [aws_subnet.foundry_publics.*.arn]
-  subnet_public_azs   = [aws_subnet.foundry_publics.*.availability_zone]
-  subnet_public_ids   = [aws_subnet.foundry_publics.*.id]
+  subnet_private_ids = aws_subnet.foundry_privates.*.id
+  subnet_public_ids  = aws_subnet.foundry_publics.*.id
 }
 
 resource "aws_vpc" "foundry" {
@@ -106,12 +102,12 @@ output internet_gateway_id {
 
 output subnet_public_arns {
   description = "The ARN of the public subnets housing the server autoscaling group and load balancer."
-  value       = local.subnet_public_arns
+  value       = aws_subnet.foundry_publics.*.arn
 }
 
 output subnet_public_azs {
   description = "The availability zones of the public subnets housing the server autoscaling group and load balancer."
-  value       = local.subnet_public_azs
+  value       = aws_subnet.foundry_publics.*.availability_zone
 }
 
 output subnet_public_ids {
@@ -121,12 +117,12 @@ output subnet_public_ids {
 
 output subnet_private_arns {
   description = "The ARN of the private subnets housing the fargate foundry task."
-  value       = local.subnet_private_arns
+  value       = aws_subnet.foundry_privates.*.arn
 }
 
 output subnet_private_azs {
   description = "The availability zones of the private subnets housing the fargate foundry task."
-  value       = local.subnet_private_azs
+  value       = aws_subnet.foundry_privates.*.availability_zone
 }
 
 output subnet_private_ids {

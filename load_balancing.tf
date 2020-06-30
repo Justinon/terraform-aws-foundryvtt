@@ -7,6 +7,24 @@ resource "aws_security_group" "foundry_load_balancer" {
   depends_on = [aws_internet_gateway.foundry]
 }
 
+resource "aws_security_group_rule" "lb_allow_inbound_80" {
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 80
+  protocol          = "tcp"
+  security_group_id = aws_security_group.foundry_load_balancer.id
+  to_port           = 80
+  type              = "ingress"
+}
+
+resource "aws_security_group_rule" "lb_allow_inbound_443" {
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.foundry_load_balancer.id
+  to_port           = 443
+  type              = "ingress"
+}
+
 resource "aws_security_group_rule" "lb_allow_foundry_port_egress" {
   from_port                = local.foundry_port
   protocol                 = "tcp"

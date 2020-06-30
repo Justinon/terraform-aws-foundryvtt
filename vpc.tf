@@ -46,6 +46,12 @@ resource "aws_route_table" "foundry_public" {
   tags   = merge(local.tags_rendered, map("Name", "foundry-public-${terraform.workspace}"))
 }
 
+resource "aws_route_table_association" "public_table" {
+  count          = length(local.subnet_public_ids)
+  subnet_id      = element(local.subnet_public_ids, count.index)
+  route_table_id = aws_route_table.foundry_public.id
+}
+
 resource "aws_internet_gateway" "foundry" {
   vpc_id = aws_vpc.foundry.id
   tags   = merge(local.tags_rendered, map("Name", "foundry-gateway-${terraform.workspace}"))
@@ -60,6 +66,12 @@ resource "aws_route" "foundry_internet_gw" {
 resource "aws_route_table" "foundry_private" {
   vpc_id = aws_vpc.foundry.id
   tags   = merge(local.tags_rendered, map("Name", "foundry-private-${terraform.workspace}"))
+}
+
+resource "aws_route_table_association" "private_table" {
+  count          = length(local.subnet_private_ids)
+  subnet_id      = element(local.subnet_private_ids, count.index)
+  route_table_id = aws_route_table.foundry_private.id
 }
 
 resource "aws_route" "foundry_nat_gw" {

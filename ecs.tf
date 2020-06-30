@@ -75,6 +75,24 @@ resource "aws_security_group_rule" "allow_foundry_port_ingress" {
   type                     = "ingress"
 }
 
+resource "aws_security_group_rule" "allow_inbound_80" {
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 80
+  protocol          = "tcp"
+  security_group_id = aws_security_group.foundry_server.id
+  to_port           = 80
+  type              = "ingress"
+}
+
+resource "aws_security_group_rule" "allow_inbound_443" {
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.foundry_server.id
+  to_port           = 443
+  type              = "ingress"
+}
+
 resource "aws_security_group_rule" "allow_outbound" {
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 0
@@ -118,7 +136,7 @@ resource "aws_ecs_service" "foundry_server" {
   }
 
   network_configuration {
-    assign_public_ip = false
+    assign_public_ip = true
     security_groups  = [aws_security_group.foundry_server.id]
     subnets          = local.subnet_private_ids
   }

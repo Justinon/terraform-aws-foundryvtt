@@ -64,7 +64,7 @@ resource "aws_route_table" "foundry_private" {
 
 resource "aws_route" "foundry_nat_gw" {
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_nat_gateway.foundry.id
+  nat_gateway_id         = aws_nat_gateway.foundry.id
   route_table_id         = aws_route_table.foundry_private.id
 }
 

@@ -12,7 +12,7 @@
  *  - [Outputs](#outputs)
  *
  * ## Description
- * Creates a fully managed VPC housing your server behind an autoscaling group and load balancer. AWS will safely manage your secrets and Foundry data in conjunction with the server to maintain availability and consistency...while still leaving you in control.
+ * Creates a fully managed VPC housing your server utilizing ECS behind a load balancer. AWS will safely manage your secrets and Foundry data in conjunction with the server to maintain availability and consistency...while still leaving you in control.
  *
  * This is the module for you if:
  * 1. You are looking to quickly create a containerized FoundryVTT server

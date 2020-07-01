@@ -61,7 +61,7 @@ module "foundryvtt_example" {
 | artifacts\_bucket\_public | Whether or not the artifacts bucket should be public. To reuse this bucket for direct Amazon S3 asset storage in browser, set to true. | `bool` | `true` | no |
 | artifacts\_data\_expiration\_days | The amount of days after which non-current version of the artifacts bucket Foundry data is expired. | `number` | `30` | no |
 | foundry\_admin\_key | The Admin Access Key to set for password-protecting administration access to the Foundry tool. Will be encrypted in AWS Parameter Store for exclusive use by the server. | `string` | `""` | no |
-| foundryvtt\_docker\_image | Probably won't work with other images yet but the option is there if you want to experiment | `string` | `"felddy/foundryvtt:0.6.3"` | no |
+| foundryvtt\_docker\_image | Probably won't work with other images yet but the option is there if you want to experiment | `string` | `"felddy/foundryvtt:release"` | no |
 | security\_groups | Any extra security groups to associate with the Foundry server. | `list` | `[]` | no |
 | tags | Any additional AWS tags you want associated with all created and eligible resources. | <pre>list(object({<br>    key   = string,<br>    value = string<br>  }))</pre> | `[]` | no |
 | vpc\_cidr\_block | The CIDR block of the Foundry VPC housing all created and eligible resources. | `string` | `"20.0.0.0/22"` | no |

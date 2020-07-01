@@ -53,7 +53,7 @@ variable foundry_username {
 }
 
 variable foundryvtt_docker_image {
-  default     = "felddy/foundryvtt:0.6.3"
+  default     = "felddy/foundryvtt:release"
   description = "Probably won't work with other images yet but the option is there if you want to experiment"
 }
 

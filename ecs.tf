@@ -149,8 +149,9 @@ resource "aws_efs_file_system" "foundry_server_data" {
 
 data "aws_iam_policy_document" "foundry_data_efs" {
   statement {
-    sid     = "FoundryServerMountAccess"
-    actions = ["elasticfilesystem:ClientMount"]
+    sid       = "FoundryServerMountAccess"
+    actions   = ["elasticfilesystem:ClientMount"]
+    resources = [aws_efs_file_system.foundry_server_data.arn]
     principals {
       type        = "AWS"
       identifiers = [aws_ecs_task_definition.foundry_server.task_role_arn]
@@ -163,8 +164,9 @@ data "aws_iam_policy_document" "foundry_data_efs" {
   }
 
   statement {
-    sid     = "FoundryServerWriteAccess"
-    actions = ["elasticfilesystem:ClientWrite"]
+    sid       = "FoundryServerWriteAccess"
+    actions   = ["elasticfilesystem:ClientWrite"]
+    resources = [aws_efs_file_system.foundry_server_data.arn]
     principals {
       type        = "AWS"
       identifiers = [aws_ecs_task_definition.foundry_server.task_role_arn]

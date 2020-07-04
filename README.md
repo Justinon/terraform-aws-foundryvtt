@@ -74,9 +74,6 @@ module "foundryvtt_example" {
 | artifacts\_bucket\_name | The name of the S3 bucket holding versioned Foundry data. |
 | credentials\_kms\_key\_arn | The ARN of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively. |
 | credentials\_kms\_key\_id | The ID of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively. |
-| instance\_profile\_arn | The ARN of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
-| instance\_profile\_id | The ID of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
-| instance\_profile\_name | The name of the instance profile the Foundry server uses to access credentials and the artifacts bucket. |
 | internet\_gateway\_arn | The ARN of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
 | internet\_gateway\_id | The ID of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
 | lb\_arn | The ARN of the application load balancer in front of the ASG serving the Foundry instance. |

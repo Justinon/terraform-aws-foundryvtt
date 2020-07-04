@@ -128,11 +128,6 @@ resource "aws_iam_role_policy_attachment" "foundry_server" {
   policy_arn = aws_iam_policy.foundry_server.arn
 }
 
-resource "aws_iam_instance_profile" "foundry_server" {
-  name_prefix = "foundry-server-profile-${terraform.workspace}"
-  role        = aws_iam_role.foundry_server.name
-}
-
 output "role_arn" {
   description = "The ARN of the role the Foundry server uses to access credentials and the artifacts bucket."
   value       = aws_iam_role.foundry_server.arn
@@ -141,21 +136,6 @@ output "role_arn" {
 output "role_name" {
   description = "The name of the role the Foundry server uses to access credentials and the artifacts bucket."
   value       = aws_iam_role.foundry_server.name
-}
-
-output "instance_profile_arn" {
-  description = "The ARN of the instance profile the Foundry server uses to access credentials and the artifacts bucket."
-  value       = aws_iam_instance_profile.foundry_server.arn
-}
-
-output "instance_profile_id" {
-  description = "The ID of the instance profile the Foundry server uses to access credentials and the artifacts bucket."
-  value       = aws_iam_instance_profile.foundry_server.arn
-}
-
-output "instance_profile_name" {
-  description = "The name of the instance profile the Foundry server uses to access credentials and the artifacts bucket."
-  value       = aws_iam_instance_profile.foundry_server.name
 }
 
 output "policy_arn" {

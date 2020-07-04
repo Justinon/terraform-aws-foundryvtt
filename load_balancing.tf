@@ -44,10 +44,11 @@ resource "aws_lb" "foundry_server" {
 }
 
 resource "aws_lb_target_group" "lb_foundry_server_http" {
-  name     = "${aws_lb.foundry_server.name}-http-tg"
-  port     = local.foundry_port
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.foundry.id
+  name        = "${aws_lb.foundry_server.name}-http-tg"
+  port        = local.foundry_port
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      = aws_vpc.foundry.id
 
   health_check {
     healthy_threshold = 2
@@ -58,10 +59,11 @@ resource "aws_lb_target_group" "lb_foundry_server_http" {
 }
 
 resource "aws_lb_target_group" "lb_foundry_server_https" {
-  name     = "${aws_lb.foundry_server.name}-https-tg"
-  port     = local.foundry_port
-  protocol = "HTTPS"
-  vpc_id   = aws_vpc.foundry.id
+  name        = "${aws_lb.foundry_server.name}-https-tg"
+  port        = local.foundry_port
+  protocol    = "HTTPS"
+  target_type = "ip"
+  vpc_id      = aws_vpc.foundry.id
 
   health_check {
     healthy_threshold = 2

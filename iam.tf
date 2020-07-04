@@ -1,15 +1,27 @@
 data "aws_iam_policy_document" "foundry_server_assume_role" {
   statement {
-    sid     = "EC2ServiceAccess"
+    sid     = "ECSTaskAccess"
     actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
+      identifiers = ["ecs-tasks.amazonaws.com"]
     }
   }
 }
 
 data "aws_iam_policy_document" "foundry_server" {
+  statement {
+    sid = "CloudwatchLogAccess"
+    actions = [
+      "logs:CreateLog*",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents",
+    ]
+    resources = [
+      "arn:aws:logs:*:*:*"
+    ]
+  }
+
   statement {
     sid = "AllowFoundryCredentialsKMSAccess"
     actions = [
@@ -36,6 +48,10 @@ data "aws_iam_policy_document" "foundry_server" {
     sid = "S3ListAllBucketsAccess"
     actions = [
       "s3:ListAllMyBuckets",
+      # "ecr:GetAuthorizationToken",
+      # "ecr:BatchCheckLayerAvailability",
+      # "ecr:GetDownloadUrlForLayer",
+      # "ecr:BatchGetImage",
     ]
     resources = [
       "*"
@@ -71,6 +87,25 @@ data "aws_iam_policy_document" "foundry_server" {
     resources = [
       "${aws_s3_bucket.foundry_artifacts.arn}/data/${terraform.workspace}/*"
     ]
+  }
+
+  statement {
+    sid = "EFSFoundryDataWriteAccess"
+    actions = [
+      "elasticfilesystem:ClientMount",
+      "elasticfilesystem:ClientWrite"
+    ]
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["true"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "elasticfilesystem:AccessPointArn"
+      values   = [aws_efs_access_point.foundry_server_data.arn]
+    }
+    resources = [aws_efs_file_system.foundry_server_data.arn]
   }
 }
 

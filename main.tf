@@ -29,7 +29,6 @@
  * First you'll need to decide which version to use. I recommend using the [latest release tag](https://github.com/Justinon/terraform-aws-foundryvtt/releases) if you can. Otherwise, search for the one that suits you.
  * You can create the module with the source and version of choice using the Terraform Registry path:
  *
- * Terraform Registry:
  * ```HCL
  * module "foundryvtt_example" {
  *   source  = "Justinon/foundryvtt/aws"

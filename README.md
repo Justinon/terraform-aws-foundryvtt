@@ -26,19 +26,14 @@ This is the module for you if:
 
 ## Source  
 First you'll need to decide which version to use. I recommend using the [latest release tag](https://github.com/Justinon/terraform-aws-foundryvtt/releases) if you can. Otherwise, search for the one that suits you.  
-You can create the module with the source and version of choice using either SSH or HTTPS:
+You can create the module with the source and version of choice using the Terraform Registry path:
 
-SSH:
+Terraform Registry:
 ```HCL
 module "foundryvtt_example" {
-  source = "git@github.com:Justinon/terraform-aws-foundryvtt.git?ref=<VERSION>"
-  ...
-}
-```  
-HTTPS:
-```HCL
-module "foundryvtt_example" {
-  source = "github.com/Justinon/terraform-aws-foundryvtt?ref=<VERSION>"
+  source  = "Justinon/foundryvtt/aws"
+  version = "X.Y.Z"
+  # insert the required variables here
   ...
 }
 ```
@@ -76,9 +71,9 @@ module "foundryvtt_example" {
 | credentials\_kms\_key\_id | The ID of the KMS key used by the server to decrypt and encrypt Foundry credentials. Used exclusively to maintain consistency and legitimacy of the server and license respectively. |
 | internet\_gateway\_arn | The ARN of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
 | internet\_gateway\_id | The ID of the Internet Gateway allowing internet access to public subnets in the Foundry VPC. |
-| lb\_arn | The ARN of the application load balancer in front of the ASG serving the Foundry instance. |
-| lb\_dns\_name | The main entrypoint to the Foundry tool for users and GMs. Is the DNS name of the application load balancer in front of the ASG serving the Foundry instance. Can be used with Route53. |
-| lb\_zone\_id | The Route53 zone ID of the application load balancer in front of the ASG serving the Foundry instance. |
+| lb\_arn | The ARN of the application load balancer in front of the Fargate task serving the Foundry container. |
+| lb\_dns\_name | The main entrypoint to the Foundry tool for users and GMs. Is the DNS name of the application load balancer in front of the Fargate task serving the Foundry container. Can be used with Route53. |
+| lb\_zone\_id | The Route53 zone ID of the application load balancer in front of the Fargate task serving the Foundry container. |
 | policy\_arn | The ARN of the policy attached to the Foundry server role. |
 | policy\_id | The ID of the policy attached to the Foundry server role. |
 | policy\_name | The name of the policy attached to the Foundry server role. |

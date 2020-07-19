@@ -98,17 +98,17 @@ resource "aws_lb_listener" "foundry_server_http" {
 # }
 
 output lb_arn {
-  description = "The ARN of the application load balancer in front of the ASG serving the Foundry instance."
+  description = "The ARN of the application load balancer in front of the Fargate task serving the Foundry container."
   value       = aws_lb.foundry_server.arn
 }
 
 output lb_dns_name {
-  description = "The main entrypoint to the Foundry tool for users and GMs. Is the DNS name of the application load balancer in front of the ASG serving the Foundry instance. Can be used with Route53."
+  description = "The main entrypoint to the Foundry tool for users and GMs. Is the DNS name of the application load balancer in front of the Fargate task serving the Foundry container. Can be used with Route53."
   value       = aws_lb.foundry_server.dns_name
 }
 
 output lb_zone_id {
-  description = "The Route53 zone ID of the application load balancer in front of the ASG serving the Foundry instance."
+  description = "The Route53 zone ID of the application load balancer in front of the Fargate task serving the Foundry container."
   value       = aws_lb.foundry_server.zone_id
 }
 
